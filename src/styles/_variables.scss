@@ -1,0 +1,163 @@
+/**
+ * ============================================================================
+ * ORYO - Design Variables & Tokens
+ * ============================================================================
+ * Location: src/styles/_variables.scss
+ * 
+ * Brand colors inspired by the warmth of Hestia's hearth
+ * All design tokens centralized for easy customization
+ * ============================================================================
+ */
+
+// ============================================================================
+// BRAND COLORS - Oryo Flame Palette
+// ============================================================================
+
+// Primary Colors
+$flame-orange: #F2A541;      // Main brand color - warm flame
+$deep-teal: #0E4D5F;         // Secondary - stable foundation
+$coral-pink: #FF686B;        // Accent - generous warmth
+$warm-cream: #FFF8F0;        // Background - welcoming light
+$charcoal: #6ED1C5;          // Highlight - digital energy
+
+// Neutral Palette
+$white: #FFFFFF;
+$off-white: #FAF6F2;
+$light-gray: #F5F0EB;
+$medium-gray: #E6DCD2;
+$dark-gray: #646470;
+$charcoal-dark: #1E1E23;
+$black: #000000;
+
+// Semantic Colors
+$success: #10B981;
+$warning: #F59E0B;
+$error: #EF4444;
+$info: #3B82F6;
+
+// ============================================================================
+// GRADIENTS - Signature Oryo Effects
+// ============================================================================
+$gradient-flame: linear-gradient(135deg, $flame-orange 0%, $coral-pink 100%);
+$gradient-hearth: linear-gradient(135deg, $flame-orange 0%, $deep-teal 50%, $coral-pink 100%);
+$gradient-warm: linear-gradient(180deg, $warm-cream 0%, $off-white 100%);
+$gradient-dark: linear-gradient(135deg, $deep-teal 0%, $charcoal-dark 100%);
+$gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+
+// ============================================================================
+// TYPOGRAPHY
+// ============================================================================
+$font-heading: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+$font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+$font-mono: 'SF Mono', 'Monaco', 'Cascadia Code', 'Courier New', monospace;
+
+// Font Sizes
+$text-xs: 0.75rem;      // 12px
+$text-sm: 0.875rem;     // 14px
+$text-base: 1rem;       // 16px
+$text-lg: 1.125rem;     // 18px
+$text-xl: 1.25rem;      // 20px
+$text-2xl: 1.5rem;      // 24px
+$text-3xl: 1.875rem;    // 30px
+$text-4xl: 2.25rem;     // 36px
+$text-5xl: 3rem;        // 48px
+$text-6xl: 3.75rem;     // 60px
+
+// Font Weights
+$font-light: 300;
+$font-normal: 400;
+$font-medium: 500;
+$font-semibold: 600;
+$font-bold: 700;
+$font-extrabold: 800;
+$font-black: 900;
+
+// Line Heights
+$leading-tight: 1.25;
+$leading-normal: 1.5;
+$leading-relaxed: 1.75;
+
+// ============================================================================
+// SPACING SCALE - Consistent rhythm
+// ============================================================================
+$space-1: 0.25rem;   // 4px
+$space-2: 0.5rem;    // 8px
+$space-3: 0.75rem;   // 12px
+$space-4: 1rem;      // 16px
+$space-5: 1.25rem;   // 20px
+$space-6: 1.5rem;    // 24px
+$space-8: 2rem;      // 32px
+$space-10: 2.5rem;   // 40px
+$space-12: 3rem;     // 48px
+$space-16: 4rem;     // 64px
+$space-20: 5rem;     // 80px
+$space-24: 6rem;     // 96px
+
+// ============================================================================
+// BORDER RADIUS - Soft, welcoming curves
+// ============================================================================
+$radius-sm: 0.375rem;    // 6px
+$radius-md: 0.5rem;      // 8px
+$radius-lg: 0.75rem;     // 12px
+$radius-xl: 1rem;        // 16px
+$radius-2xl: 1.5rem;     // 24px
+$radius-full: 9999px;    // Circular
+
+// ============================================================================
+// SHADOWS - Depth and elevation
+// ============================================================================
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-base: 0 2px 8px 0 rgba(0, 0, 0, 0.08);
+$shadow-md: 0 4px 12px 0 rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 8px 24px 0 rgba(0, 0, 0, 0.12);
+$shadow-xl: 0 16px 48px 0 rgba(0, 0, 0, 0.15);
+$shadow-warm: 0 4px 20px 0 rgba(242, 165, 65, 0.15);
+$shadow-glow: 0 0 24px 0 rgba(242, 165, 65, 0.3);
+
+// ============================================================================
+// BREAKPOINTS - Mobile-first responsive design
+// ============================================================================
+$breakpoint-sm: 640px;   // Mobile landscape
+$breakpoint-md: 768px;   // Tablet
+$breakpoint-lg: 1024px;  // Desktop
+$breakpoint-xl: 1280px;  // Large desktop
+$breakpoint-2xl: 1536px; // Extra large
+
+// ============================================================================
+// TRANSITIONS & ANIMATIONS
+// ============================================================================
+$transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+$transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+$transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+$transition-bounce: 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+$easing-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+$easing-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+$easing-elastic: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+// ============================================================================
+// Z-INDEX LAYERS - Stacking context
+// ============================================================================
+$z-base: 0;
+$z-dropdown: 1000;
+$z-sticky: 1020;
+$z-fixed: 1030;
+$z-modal-backdrop: 1040;
+$z-modal: 1050;
+$z-popover: 1060;
+$z-tooltip: 1070;
+
+// ============================================================================
+// CONTAINER & LAYOUT
+// ============================================================================
+$container-max-width: 1280px;
+$container-padding: $space-4;
+
+// ============================================================================
+// WEB3 SPECIFIC - Blockchain & Crypto aesthetics
+// ============================================================================
+$glow-primary: 0 0 20px rgba($flame-orange, 0.5);
+$glow-secondary: 0 0 20px rgba($deep-teal, 0.5);
+$glow-accent: 0 0 20px rgba($coral-pink, 0.5);
+
+$border-gradient: linear-gradient(135deg, $flame-orange, $coral-pink);

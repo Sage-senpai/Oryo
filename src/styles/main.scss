@@ -1,0 +1,53 @@
+/**
+ * ============================================================================
+ * ORYO - Main Stylesheet
+ * ============================================================================
+ * "The Hearth of Digital Value"
+ * 
+ * A warm, welcoming Web3 tipping platform inspired by Hestia
+ * Location: src/styles/main.scss
+ * 
+ * Import order matters! Core utilities → Components → Pages → Animations
+ * ============================================================================
+ */
+
+// ============================================================================
+// FONTS - Montserrat (Headings) + Inter (Body)
+// ============================================================================
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+// ============================================================================
+// CORE FOUNDATION
+// ============================================================================
+@import './variables';      // Color palette, spacing, breakpoints
+@import './mixins';         // Reusable SCSS functions
+@import './base';           // Reset, typography, global styles
+@import './utilities';      // Utility classes
+
+// ============================================================================
+// COMPONENTS
+// ============================================================================
+@import './components/buttons';
+@import './components/cards';
+@import './components/header';
+@import './components/modals';
+@import './components/forms';
+@import './components/avatars';
+
+// ============================================================================
+// PAGES
+// ============================================================================
+//@import './pages/homepage';
+//@import './pages/creator-profile';
+//@import './pages/profile';
+
+// ============================================================================
+// ANIMATIONS & EFFECTS
+// ============================================================================
+@import './animations';
+@import './effects';
+
+// ============================================================================
+// RESPONSIVE DESIGN
+// ============================================================================
+@import './responsive';

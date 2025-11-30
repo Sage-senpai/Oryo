@@ -1,0 +1,489 @@
+/**
+ * ============================================================================
+ * ORYO - Card Components
+ * ============================================================================
+ * Location: src/styles/components/_cards.scss
+ * 
+ * Various card designs for creators, tips, stats, and more
+ * Warm, welcoming containers with subtle animations
+ * ============================================================================
+ */
+
+// ============================================================================
+// BASE CARD STYLES
+// ============================================================================
+
+.card {
+  @include card-base;
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      rgba($flame-orange, 0.05) 50%, 
+      transparent 100%
+    );
+    transition: left 0.5s ease;
+  }
+  
+  &:hover::before {
+    left: 100%;
+  }
+  
+  &:hover {
+    box-shadow: $shadow-lg;
+    transform: translateY(-4px);
+  }
+}
+
+// ============================================================================
+// CREATOR CARD - For displaying creator profiles
+// ============================================================================
+
+.card-creator {
+  @include card-base;
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+  cursor: pointer;
+  border: 2px solid transparent;
+  @include smooth-transition((border-color, transform, box-shadow));
+  
+  &:hover {
+    border-color: rgba($flame-orange, 0.3);
+    box-shadow: $shadow-warm;
+    transform: translateY(-8px);
+  }
+  
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: $space-4;
+    
+    .avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: $radius-full;
+      border: 3px solid $light-gray;
+      object-fit: cover;
+      @include smooth-transition(border-color);
+    }
+    
+    .creator-info {
+      flex: 1;
+      min-width: 0;
+      
+      h3 {
+        font-size: $text-lg;
+        font-weight: $font-semibold;
+        margin-bottom: $space-1;
+        @include truncate;
+      }
+      
+      .username {
+        color: $dark-gray;
+        font-size: $text-sm;
+        @include truncate;
+      }
+    }
+  }
+  
+  .card-bio {
+    color: $dark-gray;
+    font-size: $text-sm;
+    line-height: $leading-relaxed;
+    @include line-clamp(2);
+  }
+  
+  .card-stats {
+    display: flex;
+    gap: $space-6;
+    padding-top: $space-4;
+    border-top: 1px solid $light-gray;
+    
+    .stat {
+      display: flex;
+      align-items: center;
+      gap: $space-2;
+      font-size: $text-sm;
+      color: $dark-gray;
+      
+      svg {
+        width: 16px;
+        height: 16px;
+        color: $flame-orange;
+      }
+    }
+  }
+  
+  .card-footer {
+    margin-top: auto;
+    
+    .btn {
+      width: 100%;
+    }
+  }
+  
+  // Hover effect on avatar
+  &:hover .avatar {
+    border-color: $flame-orange;
+  }
+}
+
+// ============================================================================
+// TIP CARD - For displaying tip transactions
+// ============================================================================
+
+.card-tip {
+  @include card-base;
+  padding: $space-4;
+  display: flex;
+  align-items: center;
+  gap: $space-4;
+  border-left: 4px solid $flame-orange;
+  
+  &.sent {
+    border-left-color: $coral-pink;
+  }
+  
+  &.received {
+    border-left-color: $success;
+  }
+  
+  .tip-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: $radius-full;
+    object-fit: cover;
+  }
+  
+  .tip-info {
+    flex: 1;
+    min-width: 0;
+    
+    .tip-name {
+      font-weight: $font-semibold;
+      @include truncate;
+    }
+    
+    .tip-time {
+      font-size: $text-sm;
+      color: $dark-gray;
+    }
+  }
+  
+  .tip-amount {
+    font-size: $text-lg;
+    font-weight: $font-bold;
+    @include gradient-text;
+  }
+}
+
+// ============================================================================
+// STAT CARD - For displaying metrics
+// ============================================================================
+
+.card-stat {
+  @include card-base;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px;
+    height: 100px;
+    background: $gradient-flame;
+    opacity: 0.05;
+    border-radius: $radius-full;
+    transform: translate(30%, -30%);
+  }
+  
+  .stat-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto $space-4;
+    padding: $space-3;
+    background: $gradient-flame;
+    border-radius: $radius-lg;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    svg {
+      width: 24px;
+      height: 24px;
+      color: $white;
+    }
+  }
+  
+  .stat-label {
+    font-size: $text-sm;
+    color: $dark-gray;
+    margin-bottom: $space-2;
+  }
+  
+  .stat-value {
+    font-size: $text-3xl;
+    font-weight: $font-bold;
+    @include gradient-text;
+  }
+  
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: $shadow-warm;
+  }
+}
+
+// ============================================================================
+// GLASS CARD - Glassmorphism effect
+// ============================================================================
+
+.card-glass {
+  @include glassmorphism(15px, 0.15);
+  padding: $space-6;
+  border-radius: $radius-2xl;
+  box-shadow: $shadow-base;
+  backdrop-filter: blur(15px);
+  
+  @include respond-to('md') {
+    padding: $space-8;
+  }
+}
+
+// ============================================================================
+// FEATURE CARD - For showcasing features
+// ============================================================================
+
+.card-feature {
+  @include card-base;
+  text-align: center;
+  padding: $space-8;
+  border: 2px solid transparent;
+  @include smooth-transition((border-color, transform));
+  
+  .feature-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto $space-6;
+    padding: $space-4;
+    background: $gradient-flame;
+    border-radius: $radius-2xl;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: float 3s ease-in-out infinite;
+    
+    svg {
+      width: 40px;
+      height: 40px;
+      color: $white;
+    }
+  }
+  
+  h3 {
+    font-size: $text-2xl;
+    margin-bottom: $space-3;
+  }
+  
+  p {
+    color: $dark-gray;
+    line-height: $leading-relaxed;
+  }
+  
+  &:hover {
+    border-color: $flame-orange;
+    transform: translateY(-8px);
+    
+    .feature-icon {
+      animation: none;
+      transform: scale(1.1) rotate(5deg);
+    }
+  }
+}
+
+// ============================================================================
+// COMMUNITY CARD - For displaying communities
+// ============================================================================
+
+.card-community {
+  @include card-base;
+  position: relative;
+  overflow: hidden;
+  
+  .community-banner {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: $radius-lg $radius-lg 0 0;
+    margin: -$space-6 -$space-6 $space-4;
+  }
+  
+  .community-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: $radius-full;
+    border: 4px solid $white;
+    margin-top: -40px;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .community-info {
+    margin-top: $space-4;
+    
+    h3 {
+      font-size: $text-xl;
+      margin-bottom: $space-2;
+    }
+    
+    .community-meta {
+      display: flex;
+      gap: $space-4;
+      font-size: $text-sm;
+      color: $dark-gray;
+      margin-bottom: $space-4;
+    }
+  }
+  
+  &:hover {
+    box-shadow: $shadow-warm;
+    transform: translateY(-4px);
+  }
+}
+
+// ============================================================================
+// NOTIFICATION CARD
+// ============================================================================
+
+.card-notification {
+  @include card-base;
+  padding: $space-4;
+  display: flex;
+  gap: $space-3;
+  cursor: pointer;
+  border-left: 4px solid $info;
+  
+  &.unread {
+    background: rgba($flame-orange, 0.03);
+  }
+  
+  &.success {
+    border-left-color: $success;
+  }
+  
+  &.warning {
+    border-left-color: $warning;
+  }
+  
+  &.error {
+    border-left-color: $error;
+  }
+  
+  .notification-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: $radius-full;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $light-gray;
+    flex-shrink: 0;
+    
+    svg {
+      width: 20px;
+      height: 20px;
+      color: $deep-teal;
+    }
+  }
+  
+  .notification-content {
+    flex: 1;
+    min-width: 0;
+    
+    .notification-title {
+      font-weight: $font-semibold;
+      margin-bottom: $space-1;
+    }
+    
+    .notification-message {
+      font-size: $text-sm;
+      color: $dark-gray;
+      @include line-clamp(2);
+    }
+    
+    .notification-time {
+      font-size: $text-xs;
+      color: $dark-gray;
+      margin-top: $space-2;
+    }
+  }
+  
+  &:hover {
+    background: rgba($flame-orange, 0.05);
+  }
+}
+
+// ============================================================================
+// EMPTY STATE CARD
+// ============================================================================
+
+.card-empty {
+  @include card-base;
+  text-align: center;
+  padding: $space-16 $space-8;
+  
+  .empty-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto $space-6;
+    opacity: 0.3;
+    
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  
+  h3 {
+    font-size: $text-xl;
+    margin-bottom: $space-3;
+    color: $dark-gray;
+  }
+  
+  p {
+    color: $dark-gray;
+    margin-bottom: $space-6;
+  }
+}
+
+// ============================================================================
+// RESPONSIVE ADJUSTMENTS
+// ============================================================================
+
+@include respond-to('md') {
+  .card-creator {
+    .card-header {
+      .avatar {
+        width: 72px;
+        height: 72px;
+      }
+    }
+  }
+  
+  .card-stat {
+    .stat-value {
+      font-size: $text-4xl;
+    }
+  }
+}

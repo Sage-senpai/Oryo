@@ -1,0 +1,386 @@
+/**
+ * ============================================================================
+ * ORYO - Modal/Dialog Components
+ * ============================================================================
+ * Location: src/styles/components/_modals.scss
+ * 
+ * Beautiful modal dialogs with smooth animations
+ * ============================================================================
+ */
+
+// ============================================================================
+// MODAL BACKDROP
+// ============================================================================
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba($charcoal-dark, 0.8);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: $z-modal-backdrop;
+  @include flex-center;
+  padding: $space-4;
+  animation: fadeIn 0.2s ease-out;
+  
+  &.closing {
+    animation: fadeOut 0.2s ease-out;
+  }
+}
+
+// ============================================================================
+// MODAL CONTENT
+// ============================================================================
+
+.modal-content {
+  background: $white;
+  border-radius: $radius-2xl;
+  box-shadow: $shadow-xl;
+  max-width: 500px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  animation: scaleIn 0.3s $easing-bounce;
+  @include custom-scrollbar;
+  
+  &.closing {
+    animation: scaleOut 0.2s ease-out;
+  }
+  
+  @include respond-to('md') {
+    max-width: 600px;
+  }
+}
+
+@keyframes scaleOut {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+// ============================================================================
+// MODAL HEADER
+// ============================================================================
+
+.modal-header {
+  padding: $space-6;
+  border-bottom: 1px solid $light-gray;
+  position: sticky;
+  top: 0;
+  background: $white;
+  z-index: 1;
+  border-radius: $radius-2xl $radius-2xl 0 0;
+}
+
+.modal-title {
+  font-size: $text-2xl;
+  font-weight: $font-bold;
+  margin-bottom: $space-2;
+  padding-right: $space-8;
+}
+
+.modal-description {
+  font-size: $text-sm;
+  color: $dark-gray;
+  line-height: $leading-relaxed;
+}
+
+.modal-close {
+  position: absolute;
+  top: $space-6;
+  right: $space-6;
+  width: 32px;
+  height: 32px;
+  @include flex-center;
+  border-radius: $radius-full;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  @include smooth-transition((background, transform));
+  
+  &:hover {
+    background: $light-gray;
+    transform: rotate(90deg);
+  }
+  
+  svg {
+    width: 20px;
+    height: 20px;
+    color: $dark-gray;
+  }
+}
+
+// ============================================================================
+// MODAL BODY
+// ============================================================================
+
+.modal-body {
+  padding: $space-6;
+  
+  &.no-padding {
+    padding: 0;
+  }
+}
+
+// ============================================================================
+// MODAL FOOTER
+// ============================================================================
+
+.modal-footer {
+  padding: $space-6;
+  border-top: 1px solid $light-gray;
+  @include flex-between;
+  gap: $space-3;
+  position: sticky;
+  bottom: 0;
+  background: $white;
+  border-radius: 0 0 $radius-2xl $radius-2xl;
+  
+  .btn-group {
+    display: flex;
+    gap: $space-3;
+    margin-left: auto;
+  }
+}
+
+// ============================================================================
+// TIP CONFIRMATION MODAL
+// ============================================================================
+
+.tip-modal {
+  .tip-summary {
+    background: $light-gray;
+    border-radius: $radius-xl;
+    padding: $space-4;
+    margin-bottom: $space-4;
+    
+    .summary-row {
+      @include flex-between;
+      padding: $space-3 0;
+      
+      &:not(:last-child) {
+        border-bottom: 1px solid $medium-gray;
+      }
+      
+      .label {
+        color: $dark-gray;
+        font-size: $text-sm;
+      }
+      
+      .value {
+        font-weight: $font-semibold;
+        
+        &.highlight {
+          color: $flame-orange;
+          font-size: $text-lg;
+        }
+      }
+    }
+  }
+  
+  .tip-receiver {
+    @include flex-center;
+    gap: $space-4;
+    padding: $space-4;
+    background: $light-gray;
+    border-radius: $radius-xl;
+    margin-bottom: $space-6;
+    
+    .receiver-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: $radius-full;
+      object-fit: cover;
+      border: 3px solid $white;
+    }
+    
+    .receiver-info {
+      text-align: left;
+      
+      .receiver-name {
+        font-weight: $font-semibold;
+        font-size: $text-lg;
+        margin-bottom: $space-1;
+      }
+      
+      .receiver-username {
+        color: $dark-gray;
+        font-size: $text-sm;
+      }
+    }
+  }
+  
+  .warning-box {
+    @include flex-center;
+    gap: $space-3;
+    padding: $space-4;
+    background: rgba($warning, 0.1);
+    border: 1px solid rgba($warning, 0.3);
+    border-radius: $radius-lg;
+    margin-top: $space-4;
+    
+    svg {
+      width: 20px;
+      height: 20px;
+      color: $warning;
+      flex-shrink: 0;
+    }
+    
+    p {
+      font-size: $text-sm;
+      color: darken($warning, 20%);
+      line-height: $leading-relaxed;
+    }
+  }
+}
+
+// ============================================================================
+// SUCCESS MODAL
+// ============================================================================
+
+.success-modal {
+  text-align: center;
+  
+  .success-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto $space-6;
+    border-radius: $radius-full;
+    @include flex-center;
+    background: $gradient-flame;
+    animation: celebrate 0.6s ease-out;
+    
+    svg {
+      width: 40px;
+      height: 40px;
+      color: $white;
+    }
+  }
+  
+  .success-title {
+    font-size: $text-2xl;
+    font-weight: $font-bold;
+    margin-bottom: $space-3;
+  }
+  
+  .success-message {
+    color: $dark-gray;
+    margin-bottom: $space-6;
+  }
+  
+  .success-amount {
+    font-size: $text-4xl;
+    font-weight: $font-extrabold;
+    @include gradient-text;
+    margin-bottom: $space-8;
+  }
+}
+
+// ============================================================================
+// CONFIRM DIALOG
+// ============================================================================
+
+.confirm-dialog {
+  .confirm-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto $space-4;
+    border-radius: $radius-full;
+    @include flex-center;
+    
+    &.warning {
+      background: rgba($warning, 0.1);
+      
+      svg {
+        color: $warning;
+      }
+    }
+    
+    &.danger {
+      background: rgba($error, 0.1);
+      
+      svg {
+        color: $error;
+      }
+    }
+    
+    svg {
+      width: 30px;
+      height: 30px;
+    }
+  }
+  
+  .confirm-title {
+    font-size: $text-xl;
+    font-weight: $font-bold;
+    text-align: center;
+    margin-bottom: $space-3;
+  }
+  
+  .confirm-message {
+    text-align: center;
+    color: $dark-gray;
+    line-height: $leading-relaxed;
+  }
+}
+
+// ============================================================================
+// LOADING MODAL
+// ============================================================================
+
+.loading-modal {
+  text-align: center;
+  padding: $space-8 $space-6;
+  
+  .loading-spinner {
+    margin: 0 auto $space-6;
+  }
+  
+  .loading-text {
+    font-size: $text-lg;
+    color: $dark-gray;
+    margin-bottom: $space-2;
+  }
+  
+  .loading-subtext {
+    font-size: $text-sm;
+    color: $dark-gray;
+    opacity: 0.7;
+  }
+}
+
+// ============================================================================
+// RESPONSIVE ADJUSTMENTS
+// ============================================================================
+
+@media (max-width: $breakpoint-sm - 1) {
+  .modal-content {
+    max-width: 95vw;
+    border-radius: $radius-xl;
+  }
+  
+  .modal-header,
+  .modal-body,
+  .modal-footer {
+    padding: $space-4;
+  }
+  
+  .modal-title {
+    font-size: $text-xl;
+  }
+}

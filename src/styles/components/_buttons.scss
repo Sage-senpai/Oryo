@@ -1,0 +1,297 @@
+/**
+ * ============================================================================
+ * ORYO - Button Components
+ * ============================================================================
+ * Location: src/styles/components/_buttons.scss
+ * 
+ * Interactive buttons with Web3 aesthetics
+ * Includes primary, secondary, ghost variants and special effects
+ * ============================================================================
+ */
+
+// ============================================================================
+// BASE BUTTON STYLES
+// ============================================================================
+
+.btn {
+  @include button-base;
+  position: relative;
+  overflow: hidden;
+  
+  // Ripple effect container
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+    transform: scale(0);
+    opacity: 0;
+    transition: transform 0.5s, opacity 0.5s;
+  }
+  
+  &:active::before {
+    transform: scale(2);
+    opacity: 1;
+    transition: 0s;
+  }
+}
+
+// ============================================================================
+// PRIMARY BUTTON - Flame gradient
+// ============================================================================
+
+.btn-primary {
+  @include flame-gradient;
+  color: $white;
+  box-shadow: $shadow-warm;
+  
+  &:hover:not(:disabled) {
+    box-shadow: $shadow-glow;
+    transform: translateY(-2px);
+  }
+  
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+}
+
+// ============================================================================
+// SECONDARY BUTTON - Deep teal
+// ============================================================================
+
+.btn-secondary {
+  background: $deep-teal;
+  color: $white;
+  box-shadow: $shadow-base;
+  
+  &:hover:not(:disabled) {
+    background: lighten($deep-teal, 5%);
+    box-shadow: $shadow-md;
+    transform: translateY(-2px);
+  }
+}
+
+// ============================================================================
+// OUTLINE BUTTON - Transparent with gradient border
+// ============================================================================
+
+.btn-outline {
+  background: transparent;
+  color: $flame-orange;
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 2px;
+    @include flame-gradient;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+  
+  &:hover:not(:disabled) {
+    background: rgba($flame-orange, 0.05);
+    transform: translateY(-2px);
+  }
+}
+
+// ============================================================================
+// GHOST BUTTON - Minimal with hover effect
+// ============================================================================
+
+.btn-ghost {
+  background: transparent;
+  color: $charcoal-dark;
+  
+  &:hover:not(:disabled) {
+    background: $light-gray;
+  }
+}
+
+// ============================================================================
+// GLASS BUTTON - Glassmorphism effect
+// ============================================================================
+
+.btn-glass {
+  @include glassmorphism;
+  color: $charcoal-dark;
+  
+  &:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+  }
+}
+
+// ============================================================================
+// CONNECT WALLET BUTTON - Special Web3 styling
+// ============================================================================
+
+.btn-connect-wallet {
+  @include hearth-gradient;
+  color: $white;
+  font-weight: $font-bold;
+  padding: $space-4 $space-8;
+  box-shadow: $shadow-warm;
+  position: relative;
+  
+  // Animated glow
+  &::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    @include hearth-gradient;
+    border-radius: inherit;
+    opacity: 0;
+    z-index: -1;
+    filter: blur(10px);
+    @include smooth-transition(opacity);
+  }
+  
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    
+    &::after {
+      opacity: 0.7;
+    }
+  }
+  
+  // Pulse animation when disconnected
+  &.pulse {
+    @include pulse;
+  }
+}
+
+// ============================================================================
+// TIP BUTTON - Primary action for tipping
+// ============================================================================
+
+.btn-tip {
+  @include flame-gradient;
+  color: $white;
+  font-weight: $font-bold;
+  padding: $space-4 $space-8;
+  font-size: $text-lg;
+  box-shadow: $shadow-warm;
+  position: relative;
+  
+  // Confetti burst effect on click
+  &.celebrating {
+    animation: celebrate 0.6s ease-out;
+  }
+  
+  @keyframes celebrate {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1) rotate(2deg); }
+    100% { transform: scale(1); }
+  }
+  
+  &:hover:not(:disabled) {
+    box-shadow: $shadow-glow;
+    transform: translateY(-3px) scale(1.02);
+  }
+}
+
+// ============================================================================
+// BUTTON SIZES
+// ============================================================================
+
+.btn-sm {
+  padding: $space-2 $space-4;
+  font-size: $text-sm;
+}
+
+.btn-md {
+  padding: $space-3 $space-6;
+  font-size: $text-base;
+}
+
+.btn-lg {
+  padding: $space-4 $space-8;
+  font-size: $text-lg;
+}
+
+.btn-xl {
+  padding: $space-5 $space-10;
+  font-size: $text-xl;
+}
+
+// ============================================================================
+// ICON BUTTONS
+// ============================================================================
+
+.btn-icon {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: $radius-full;
+  
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+  
+  &.btn-icon-sm {
+    width: 32px;
+    height: 32px;
+    
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+  
+  &.btn-icon-lg {
+    width: 48px;
+    height: 48px;
+    
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+
+// ============================================================================
+// BUTTON GROUPS
+// ============================================================================
+
+.btn-group {
+  display: flex;
+  gap: $space-2;
+  
+  .btn {
+    flex: 1;
+  }
+}
+
+// ============================================================================
+// LOADING STATE
+// ============================================================================
+
+.btn-loading {
+  position: relative;
+  color: transparent;
+  pointer-events: none;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    left: 50%;
+    margin-left: -8px;
+    margin-top: -8px;
+    border: 2px solid transparent;
+    border-top-color: currentColor;
+    border-radius: $radius-full;
+    animation: spin 0.6s linear infinite;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+}

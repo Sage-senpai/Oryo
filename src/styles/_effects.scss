@@ -1,0 +1,524 @@
+/**
+ * ============================================================================
+ * ORYO - Web3 Visual Effects
+ * ============================================================================
+ * Location: src/styles/_effects.scss
+ * 
+ * Special visual effects for blockchain interactions
+ * Brings the warmth of Hestia's hearth to life
+ * ============================================================================
+ */
+
+// ============================================================================
+// FLAME EFFECTS - Core brand aesthetic
+// ============================================================================
+
+.flame-border {
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    @include flame-gradient;
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0;
+    @include smooth-transition(opacity);
+  }
+  
+  &:hover::before {
+    opacity: 1;
+  }
+}
+
+.flame-glow {
+  animation: flameGlow 3s ease-in-out infinite;
+}
+
+.ember-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: $flame-orange;
+  border-radius: $radius-full;
+  opacity: 0;
+  animation: ember 3s ease-out infinite;
+}
+
+// Generate multiple ember particles
+@for $i from 1 through 10 {
+  .ember-particle:nth-child(#{$i}) {
+    left: random(100) * 1%;
+    animation-delay: #{$i * 0.3}s;
+  }
+}
+
+// ============================================================================
+// GLASSMORPHISM EFFECTS
+// ============================================================================
+
+.glass-panel {
+  @include glassmorphism(20px, 0.15);
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      45deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.1) 50%,
+      transparent 70%
+    );
+    transform: rotate(45deg);
+    animation: shine 3s ease-in-out infinite;
+  }
+}
+
+.glass-button {
+  @include glassmorphism;
+  @include smooth-transition((background, transform));
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// ============================================================================
+// GLOW EFFECTS
+// ============================================================================
+
+.glow-primary {
+  @include glow($flame-orange, 0.5);
+}
+
+.glow-secondary {
+  @include glow($deep-teal, 0.5);
+}
+
+.glow-accent {
+  @include glow($coral-pink, 0.5);
+}
+
+.glow-success {
+  @include glow($success, 0.5);
+}
+
+.glow-pulse {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+.text-glow-flame {
+  @include text-glow($flame-orange);
+}
+
+// ============================================================================
+// GRADIENT ANIMATIONS
+// ============================================================================
+
+.gradient-shift {
+  background: $gradient-hearth;
+  background-size: 200% 200%;
+  animation: gradientShift 5s ease infinite;
+}
+
+.gradient-border {
+  position: relative;
+  background: $white;
+  border-radius: $radius-xl;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    @include hearth-gradient;
+    border-radius: inherit;
+    z-index: -1;
+    background-size: 200% 200%;
+    animation: gradientShift 3s ease infinite;
+  }
+}
+
+// ============================================================================
+// PARTICLE EFFECTS
+// ============================================================================
+
+.particle-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  
+  .particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: $flame-orange;
+    border-radius: $radius-full;
+    opacity: 0.3;
+    animation: float 20s ease-in-out infinite;
+  }
+}
+
+// Generate multiple particles
+@for $i from 1 through 20 {
+  .particle:nth-child(#{$i}) {
+    left: random(100) * 1%;
+    top: random(100) * 1%;
+    animation-delay: #{$i * 0.5}s;
+    animation-duration: #{10 + random(10)}s;
+  }
+}
+
+// ============================================================================
+// TRANSACTION STATES
+// ============================================================================
+
+.tx-pending {
+  position: relative;
+  overflow: hidden;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba($flame-orange, 0.3) 50%,
+      transparent 100%
+    );
+    animation: shimmer 2s linear infinite;
+  }
+}
+
+.tx-success {
+  animation: celebrate 0.6s ease-out;
+  
+  &::before {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    font-size: 48px;
+    color: $success;
+    animation: checkmark 0.5s ease-out forwards;
+  }
+}
+
+@keyframes checkmark {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+.tx-error {
+  animation: shake 0.5s ease-out;
+  
+  &::before {
+    content: '✕';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 48px;
+    color: $error;
+    animation: fadeIn 0.3s ease-out;
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-10px);
+  }
+  75% {
+    transform: translateX(10px);
+  }
+}
+
+// ============================================================================
+// LOADING EFFECTS
+// ============================================================================
+
+.loading-dots {
+  display: inline-flex;
+  gap: $space-2;
+  
+  span {
+    width: 8px;
+    height: 8px;
+    background: $flame-orange;
+    border-radius: $radius-full;
+    animation: loadingDots 1.4s ease-in-out infinite;
+    
+    &:nth-child(1) {
+      animation-delay: 0s;
+    }
+    
+    &:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    
+    &:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+  }
+}
+
+@keyframes loadingDots {
+  0%, 80%, 100% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid $light-gray;
+  border-top-color: $flame-orange;
+  border-radius: $radius-full;
+  animation: spin 0.8s linear infinite;
+}
+
+.loading-gradient {
+  width: 40px;
+  height: 40px;
+  border-radius: $radius-full;
+  background: conic-gradient(
+    from 0deg,
+    $flame-orange 0deg,
+    $coral-pink 180deg,
+    $flame-orange 360deg
+  );
+  animation: spin 1s linear infinite;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    background: $white;
+    border-radius: inherit;
+  }
+}
+
+// ============================================================================
+// RIPPLE EFFECT
+// ============================================================================
+
+.ripple {
+  position: relative;
+  overflow: hidden;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-radius: $radius-full;
+    background: rgba($flame-orange, 0.4);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+  
+  &:active::after {
+    animation: ripple 0.6s ease-out;
+  }
+}
+
+@keyframes ripple {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    width: 200px;
+    height: 200px;
+    opacity: 0;
+  }
+}
+
+// ============================================================================
+// CONFETTI CELEBRATION
+// ============================================================================
+
+.confetti-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.confetti-piece {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: $flame-orange;
+  top: -10%;
+  opacity: 0;
+  
+  &.piece-1 { background: $flame-orange; }
+  &.piece-2 { background: $coral-pink; }
+  &.piece-3 { background: $deep-teal; }
+  &.piece-4 { background: $charcoal; }
+}
+
+@for $i from 1 through 50 {
+  .confetti-piece:nth-child(#{$i}) {
+    left: random(100) * 1%;
+    animation: confettiFall #{2 + random(3)}s ease-out #{$i * 0.05}s;
+  }
+}
+
+// ============================================================================
+// HOVER EFFECTS
+// ============================================================================
+
+.hover-glow-flame {
+  @include smooth-transition(box-shadow);
+  
+  &:hover {
+    @include glow($flame-orange, 0.6);
+  }
+}
+
+.hover-scale-bounce {
+  @include bounce-transition(transform);
+  
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.hover-float {
+  @include smooth-transition(transform);
+  
+  &:hover {
+    animation: float 2s ease-in-out infinite;
+  }
+}
+
+// ============================================================================
+// TOOLTIP EFFECTS
+// ============================================================================
+
+.tooltip {
+  position: relative;
+  
+  &::before,
+  &::after {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    @include smooth-transition((opacity, transform));
+  }
+  
+  &::before {
+    content: attr(data-tooltip);
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-5px);
+    padding: $space-2 $space-3;
+    background: $charcoal-dark;
+    color: $white;
+    font-size: $text-sm;
+    border-radius: $radius-md;
+    white-space: nowrap;
+    margin-bottom: $space-2;
+  }
+  
+  &::after {
+    content: '';
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(0);
+    border: 5px solid transparent;
+    border-top-color: $charcoal-dark;
+  }
+  
+  &:hover {
+    &::before,
+    &::after {
+      opacity: 1;
+      transform: translateX(-50%) translateY(-10px);
+    }
+    
+    &::after {
+      transform: translateX(-50%) translateY(-5px);
+    }
+  }
+}
+
+// ============================================================================
+// SKELETON LOADING
+// ============================================================================
+
+.skeleton {
+  @include skeleton;
+  border-radius: $radius-md;
+  
+  &.skeleton-text {
+    height: 1em;
+    margin-bottom: $space-2;
+  }
+  
+  &.skeleton-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: $radius-full;
+  }
+  
+  &.skeleton-button {
+    height: 40px;
+    width: 120px;
+    border-radius: $radius-lg;
+  }
+}
+
+// ============================================================================
+// FOCUS INDICATORS
+// ============================================================================
+
+.focus-flame {
+  @include focus-ring($flame-orange);
+}
+
+.focus-glow:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba($flame-orange, 0.3),
+              0 0 20px rgba($flame-orange, 0.2);
+}

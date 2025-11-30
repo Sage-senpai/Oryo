@@ -1,0 +1,378 @@
+/**
+ * ============================================================================
+ * ORYO - Responsive Design System
+ * ============================================================================
+ * Location: src/styles/_responsive.scss
+ * 
+ * Mobile-first responsive breakpoints and utilities
+ * Ensures perfect experience across all devices
+ * ============================================================================
+ */
+
+// ============================================================================
+// CONTAINER BREAKPOINTS
+// ============================================================================
+
+.container {
+  @include respond-to('sm') {
+    max-width: 640px;
+  }
+  
+  @include respond-to('md') {
+    max-width: 768px;
+  }
+  
+  @include respond-to('lg') {
+    max-width: 1024px;
+  }
+  
+  @include respond-to('xl') {
+    max-width: 1280px;
+  }
+}
+
+// ============================================================================
+// MOBILE SPECIFIC (< 640px)
+// ============================================================================
+
+@media (max-width: $breakpoint-sm - 1) {
+  // Typography adjustments
+  h1 {
+    font-size: $text-3xl;
+  }
+  
+  h2 {
+    font-size: $text-2xl;
+  }
+  
+  h3 {
+    font-size: $text-xl;
+  }
+  
+  // Button sizes
+  .btn {
+    padding: $space-3 $space-5;
+    font-size: $text-sm;
+  }
+  
+  .btn-lg {
+    padding: $space-4 $space-6;
+  }
+  
+  // Cards
+  .card {
+    padding: $space-4;
+  }
+  
+  // Modal adjustments
+  .modal-content {
+    width: 95vw;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  
+  // Header
+  .header-container {
+    padding: $space-3 $space-4;
+  }
+  
+  .logo-text {
+    font-size: $text-xl;
+  }
+  
+  // Hide on mobile
+  .hidden-mobile {
+    display: none !important;
+  }
+}
+
+// ============================================================================
+// TABLET (640px - 1024px)
+// ============================================================================
+
+@include respond-to('sm') {
+  .container {
+    padding-left: $space-6;
+    padding-right: $space-6;
+  }
+  
+  .grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@include respond-to('md') {
+  // Spacing increases
+  section {
+    padding: $space-20 0;
+  }
+  
+  // Cards get more padding
+  .card {
+    padding: $space-6;
+  }
+  
+  .card-creator {
+    padding: $space-6;
+  }
+  
+  // Typography scales
+  .hero-title {
+    font-size: $text-5xl;
+  }
+  
+  .hero-subtitle {
+    font-size: $text-xl;
+  }
+  
+  // Show on tablet
+  .visible-tablet {
+    display: block !important;
+  }
+}
+
+// ============================================================================
+// DESKTOP (1024px+)
+// ============================================================================
+
+@include respond-to('lg') {
+  // Maximum spacing
+  section {
+    padding: $space-24 0;
+  }
+  
+  // Full-width grids
+  .grid-cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .grid-cols-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  // Large typography
+  .hero-title {
+    font-size: $text-6xl;
+  }
+  
+  // Enhanced hover effects
+  .card-creator:hover {
+    transform: translateY(-12px);
+  }
+  
+  // Show on desktop
+  .visible-desktop {
+    display: block !important;
+  }
+  
+  // Hide on desktop
+  .hidden-desktop {
+    display: none !important;
+  }
+}
+
+// ============================================================================
+// EXTRA LARGE (1280px+)
+// ============================================================================
+
+@include respond-to('xl') {
+  .container {
+    padding-left: $space-8;
+    padding-right: $space-8;
+  }
+  
+  // Even larger cards
+  .card-feature {
+    padding: $space-12;
+  }
+}
+
+// ============================================================================
+// ORIENTATION SPECIFIC
+// ============================================================================
+
+@media (orientation: landscape) and (max-height: 600px) {
+  // Reduce vertical spacing on landscape phones
+  section {
+    padding: $space-12 0;
+  }
+  
+  .modal-content {
+    max-height: 85vh;
+  }
+}
+
+// ============================================================================
+// PRINT STYLES
+// ============================================================================
+
+@media print {
+  * {
+    background: white !important;
+    color: black !important;
+    box-shadow: none !important;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+  
+  a {
+    text-decoration: underline;
+  }
+  
+  a[href]::after {
+    content: " (" attr(href) ")";
+  }
+  
+  .btn {
+    border: 1px solid black;
+  }
+}
+
+// ============================================================================
+// TOUCH DEVICE OPTIMIZATIONS
+// ============================================================================
+
+@media (hover: none) and (pointer: coarse) {
+  // Larger touch targets
+  .btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  .btn-icon {
+    width: 44px;
+    height: 44px;
+  }
+  
+  // Remove hover effects on touch devices
+  .hover-lift:hover {
+    transform: none;
+  }
+  
+  // Increase tap area
+  a, button {
+    padding: $space-3;
+  }
+}
+
+// ============================================================================
+// REDUCED MOTION
+// ============================================================================
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  // Disable all animated classes
+  .animate-fadeIn,
+  .animate-fadeInUp,
+  .animate-scaleIn,
+  .animate-pulse,
+  .animate-float,
+  .animate-flicker,
+  .animate-shimmer,
+  .animate-bounce {
+    animation: none !important;
+  }
+}
+
+// ============================================================================
+// HIGH CONTRAST MODE
+// ============================================================================
+
+@media (prefers-contrast: high) {
+  * {
+    border-width: 2px;
+  }
+  
+  .btn {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
+  
+  .card {
+    border: 2px solid currentColor;
+  }
+  
+  a {
+    text-decoration: underline;
+  }
+}
+
+// ============================================================================
+// DARK MODE (Future implementation)
+// ============================================================================
+
+@media (prefers-color-scheme: dark) {
+  // Dark mode variables would go here
+  // Currently Oryo uses light theme as default
+  
+  :root {
+    --background: #{$charcoal-dark};
+    --foreground: #{$white};
+    --card: #{darken($charcoal-dark, 5%)};
+  }
+  
+  body {
+    background: $charcoal-dark;
+    color: $white;
+  }
+  
+  .card {
+    background: darken($charcoal-dark, 5%);
+    border-color: lighten($charcoal-dark, 10%);
+  }
+  
+  // More dark mode styles...
+}
+
+// ============================================================================
+// UTILITY RESPONSIVE CLASSES
+// ============================================================================
+
+// Hide/show at breakpoints
+@each $breakpoint in (sm, md, lg, xl) {
+  @include respond-to($breakpoint) {
+    .hide-#{$breakpoint} {
+      display: none !important;
+    }
+    
+    .show-#{$breakpoint} {
+      display: block !important;
+    }
+    
+    .flex-#{$breakpoint} {
+      display: flex !important;
+    }
+    
+    .grid-#{$breakpoint} {
+      display: grid !important;
+    }
+  }
+}
+
+// Stack on mobile, row on desktop
+.stack-mobile {
+  flex-direction: column;
+  
+  @include respond-to('md') {
+    flex-direction: row;
+  }
+}
+
+// Reverse on mobile
+.reverse-mobile {
+  flex-direction: column-reverse;
+  
+  @include respond-to('md') {
+    flex-direction: row;
+  }
+}

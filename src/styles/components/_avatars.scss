@@ -1,0 +1,421 @@
+/**
+ * ============================================================================
+ * ORYO - Avatar Components
+ * ============================================================================
+ * Location: src/styles/components/_avatars.scss
+ * 
+ * User avatars with various sizes and styles
+ * ============================================================================
+ */
+
+// ============================================================================
+// BASE AVATAR
+// ============================================================================
+
+.avatar {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: $radius-full;
+  overflow: hidden;
+  background: $light-gray;
+  @include smooth-transition((transform, box-shadow));
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+// ============================================================================
+// AVATAR SIZES
+// ============================================================================
+
+.avatar-xs {
+  width: 24px;
+  height: 24px;
+}
+
+.avatar-sm {
+  width: 32px;
+  height: 32px;
+}
+
+.avatar-md {
+  width: 40px;
+  height: 40px;
+}
+
+.avatar-lg {
+  width: 56px;
+  height: 56px;
+}
+
+.avatar-xl {
+  width: 80px;
+  height: 80px;
+}
+
+.avatar-2xl {
+  width: 120px;
+  height: 120px;
+}
+
+// ============================================================================
+// AVATAR WITH BORDER
+// ============================================================================
+
+.avatar-bordered {
+  border: 3px solid $white;
+  box-shadow: $shadow-base;
+  
+  &.border-primary {
+    border-color: $flame-orange;
+  }
+  
+  &.border-secondary {
+    border-color: $deep-teal;
+  }
+  
+  &.border-success {
+    border-color: $success;
+  }
+}
+
+// ============================================================================
+// AVATAR FALLBACK (Initials)
+// ============================================================================
+
+.avatar-fallback {
+  @include flex-center;
+  width: 100%;
+  height: 100%;
+  background: $gradient-flame;
+  color: $white;
+  font-weight: $font-semibold;
+  font-size: 0.875em;
+  text-transform: uppercase;
+}
+
+// ============================================================================
+// AVATAR WITH STATUS
+// ============================================================================
+
+.avatar-status {
+  position: relative;
+  
+  .status-indicator {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 12px;
+    height: 12px;
+    border-radius: $radius-full;
+    border: 2px solid $white;
+    
+    &.online {
+      background: $success;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    
+    &.offline {
+      background: $dark-gray;
+    }
+    
+    &.busy {
+      background: $error;
+    }
+    
+    &.away {
+      background: $warning;
+    }
+  }
+  
+  &.avatar-lg .status-indicator {
+    width: 16px;
+    height: 16px;
+  }
+  
+  &.avatar-xl .status-indicator {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+// ============================================================================
+// AVATAR GROUP (Stacked)
+// ============================================================================
+
+.avatar-group {
+  display: inline-flex;
+  align-items: center;
+  
+  .avatar {
+    margin-left: -8px;
+    border: 2px solid $white;
+    @include smooth-transition(transform);
+    
+    &:first-child {
+      margin-left: 0;
+    }
+    
+    &:hover {
+      transform: translateY(-4px) scale(1.1);
+      z-index: 10;
+    }
+  }
+  
+  .avatar-count {
+    @include flex-center;
+    width: 40px;
+    height: 40px;
+    margin-left: -8px;
+    border-radius: $radius-full;
+    background: $gradient-flame;
+    color: $white;
+    font-size: $text-sm;
+    font-weight: $font-semibold;
+    border: 2px solid $white;
+  }
+}
+
+// ============================================================================
+// AVATAR WITH BADGE
+// ============================================================================
+
+.avatar-badge {
+  position: relative;
+  
+  .badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 $space-2;
+    @include flex-center;
+    background: $error;
+    color: $white;
+    font-size: $text-xs;
+    font-weight: $font-bold;
+    border-radius: $radius-full;
+    border: 2px solid $white;
+    animation: pulse 2s ease-in-out infinite;
+  }
+}
+
+// ============================================================================
+// VERIFIED BADGE
+// ============================================================================
+
+.avatar-verified {
+  position: relative;
+  
+  .verified-badge {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    @include flex-center;
+    background: $success;
+    border-radius: $radius-full;
+    border: 2px solid $white;
+    
+    svg {
+      width: 12px;
+      height: 12px;
+      color: $white;
+    }
+  }
+  
+  &.avatar-lg .verified-badge {
+    width: 24px;
+    height: 24px;
+    
+    svg {
+      width: 14px;
+      height: 14px;
+    }
+  }
+}
+
+// ============================================================================
+// SQUARE AVATARS
+// ============================================================================
+
+.avatar-square {
+  border-radius: $radius-lg;
+}
+
+.avatar-rounded {
+  border-radius: $radius-xl;
+}
+
+// ============================================================================
+// AVATAR WITH RING
+// ============================================================================
+
+.avatar-ring {
+  position: relative;
+  padding: 4px;
+  background: $gradient-flame;
+  border-radius: $radius-full;
+  
+  .avatar-inner {
+    border-radius: $radius-full;
+    border: 2px solid $white;
+  }
+  
+  &.ring-pulse {
+    animation: pulseGlow 2s ease-in-out infinite;
+  }
+}
+
+// ============================================================================
+// AVATAR PLACEHOLDER (Loading)
+// ============================================================================
+
+.avatar-placeholder {
+  @extend .avatar;
+  @include skeleton;
+}
+
+// ============================================================================
+// PROFILE AVATAR (Large with upload)
+// ============================================================================
+
+.profile-avatar {
+  position: relative;
+  display: inline-block;
+  
+  .avatar {
+    width: 120px;
+    height: 120px;
+    cursor: pointer;
+  }
+  
+  .avatar-overlay {
+    position: absolute;
+    inset: 0;
+    @include flex-center;
+    background: rgba($charcoal-dark, 0.7);
+    border-radius: $radius-full;
+    opacity: 0;
+    @include smooth-transition(opacity);
+    cursor: pointer;
+    
+    svg {
+      width: 32px;
+      height: 32px;
+      color: $white;
+    }
+  }
+  
+  &:hover .avatar-overlay {
+    opacity: 1;
+  }
+  
+  input[type="file"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .upload-button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 36px;
+    height: 36px;
+    @include flex-center;
+    background: $gradient-flame;
+    border-radius: $radius-full;
+    border: 3px solid $white;
+    cursor: pointer;
+    @include smooth-transition(transform);
+    
+    &:hover {
+      transform: scale(1.1);
+    }
+    
+    svg {
+      width: 18px;
+      height: 18px;
+      color: $white;
+    }
+  }
+}
+
+// ============================================================================
+// AVATAR LIST
+// ============================================================================
+
+.avatar-list {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  
+  .avatar-item {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+    padding: $space-3;
+    border-radius: $radius-lg;
+    @include smooth-transition(background);
+    
+    &:hover {
+      background: $light-gray;
+    }
+    
+    .avatar-info {
+      flex: 1;
+      min-width: 0;
+      
+      .name {
+        font-weight: $font-semibold;
+        @include truncate;
+      }
+      
+      .username {
+        font-size: $text-sm;
+        color: $dark-gray;
+        @include truncate;
+      }
+    }
+    
+    .avatar-action {
+      flex-shrink: 0;
+    }
+  }
+}
+
+// ============================================================================
+// RESPONSIVE ADJUSTMENTS
+// ============================================================================
+
+@media (max-width: $breakpoint-sm - 1) {
+  .avatar-xl {
+    width: 64px;
+    height: 64px;
+  }
+  
+  .avatar-2xl {
+    width: 96px;
+    height: 96px;
+  }
+  
+  .profile-avatar .avatar {
+    width: 96px;
+    height: 96px;
+  }
+}

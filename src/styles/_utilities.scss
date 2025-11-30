@@ -1,0 +1,432 @@
+/**
+ * ============================================================================
+ * ORYO - Utility Classes
+ * ============================================================================
+ * Location: src/styles/_utilities.scss
+ * 
+ * Quick utility classes for rapid development
+ * Works alongside Tailwind for maximum flexibility
+ * ============================================================================
+ */
+
+// ============================================================================
+// SPACING UTILITIES
+// ============================================================================
+
+// Margins
+.m-auto { margin: auto; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.my-auto { margin-top: auto; margin-bottom: auto; }
+
+// Padding
+@each $size, $value in (
+  0: 0,
+  1: $space-1,
+  2: $space-2,
+  3: $space-3,
+  4: $space-4,
+  5: $space-5,
+  6: $space-6,
+  8: $space-8,
+  10: $space-10,
+  12: $space-12,
+  16: $space-16,
+  20: $space-20
+) {
+  .p-#{$size} { padding: $value; }
+  .px-#{$size} { padding-left: $value; padding-right: $value; }
+  .py-#{$size} { padding-top: $value; padding-bottom: $value; }
+  .pt-#{$size} { padding-top: $value; }
+  .pr-#{$size} { padding-right: $value; }
+  .pb-#{$size} { padding-bottom: $value; }
+  .pl-#{$size} { padding-left: $value; }
+  
+  .m-#{$size} { margin: $value; }
+  .mx-#{$size} { margin-left: $value; margin-right: $value; }
+  .my-#{$size} { margin-top: $value; margin-bottom: $value; }
+  .mt-#{$size} { margin-top: $value; }
+  .mr-#{$size} { margin-right: $value; }
+  .mb-#{$size} { margin-bottom: $value; }
+  .ml-#{$size} { margin-left: $value; }
+}
+
+// ============================================================================
+// DISPLAY UTILITIES
+// ============================================================================
+
+.block { display: block; }
+.inline-block { display: inline-block; }
+.inline { display: inline; }
+.flex { display: flex; }
+.inline-flex { display: inline-flex; }
+.grid { display: grid; }
+.hidden { display: none; }
+
+// Flex utilities
+.flex-row { flex-direction: row; }
+.flex-col { flex-direction: column; }
+.flex-wrap { flex-wrap: wrap; }
+.flex-nowrap { flex-wrap: nowrap; }
+.flex-1 { flex: 1 1 0%; }
+.flex-auto { flex: 1 1 auto; }
+.flex-none { flex: none; }
+
+// Justify content
+.justify-start { justify-content: flex-start; }
+.justify-end { justify-content: flex-end; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.justify-around { justify-content: space-around; }
+
+// Align items
+.items-start { align-items: flex-start; }
+.items-end { align-items: flex-end; }
+.items-center { align-items: center; }
+.items-baseline { align-items: baseline; }
+.items-stretch { align-items: stretch; }
+
+// Gap
+.gap-1 { gap: $space-1; }
+.gap-2 { gap: $space-2; }
+.gap-3 { gap: $space-3; }
+.gap-4 { gap: $space-4; }
+.gap-6 { gap: $space-6; }
+.gap-8 { gap: $space-8; }
+
+// ============================================================================
+// TEXT UTILITIES
+// ============================================================================
+
+// Text alignment
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-justify { text-align: justify; }
+
+// Text transform
+.uppercase { text-transform: uppercase; }
+.lowercase { text-transform: lowercase; }
+.capitalize { text-transform: capitalize; }
+.normal-case { text-transform: none; }
+
+// Font weights
+.font-light { font-weight: $font-light; }
+.font-normal { font-weight: $font-normal; }
+.font-medium { font-weight: $font-medium; }
+.font-semibold { font-weight: $font-semibold; }
+.font-bold { font-weight: $font-bold; }
+.font-extrabold { font-weight: $font-extrabold; }
+.font-black { font-weight: $font-black; }
+
+// Font sizes
+.text-xs { font-size: $text-xs; }
+.text-sm { font-size: $text-sm; }
+.text-base { font-size: $text-base; }
+.text-lg { font-size: $text-lg; }
+.text-xl { font-size: $text-xl; }
+.text-2xl { font-size: $text-2xl; }
+.text-3xl { font-size: $text-3xl; }
+.text-4xl { font-size: $text-4xl; }
+.text-5xl { font-size: $text-5xl; }
+.text-6xl { font-size: $text-6xl; }
+
+// Line heights
+.leading-tight { line-height: $leading-tight; }
+.leading-normal { line-height: $leading-normal; }
+.leading-relaxed { line-height: $leading-relaxed; }
+
+// Text overflow
+.truncate {
+  @include truncate;
+}
+
+.line-clamp-1 { @include line-clamp(1); }
+.line-clamp-2 { @include line-clamp(2); }
+.line-clamp-3 { @include line-clamp(3); }
+.line-clamp-4 { @include line-clamp(4); }
+
+// ============================================================================
+// COLOR UTILITIES
+// ============================================================================
+
+// Text colors
+.text-primary { color: $flame-orange; }
+.text-secondary { color: $deep-teal; }
+.text-accent { color: $coral-pink; }
+.text-muted { color: $dark-gray; }
+.text-white { color: $white; }
+.text-black { color: $charcoal-dark; }
+
+// Background colors
+.bg-primary { background-color: $flame-orange; }
+.bg-secondary { background-color: $deep-teal; }
+.bg-accent { background-color: $coral-pink; }
+.bg-white { background-color: $white; }
+.bg-cream { background-color: $warm-cream; }
+.bg-light { background-color: $light-gray; }
+
+// Border colors
+.border-primary { border-color: $flame-orange; }
+.border-secondary { border-color: $deep-teal; }
+.border-light { border-color: $light-gray; }
+
+// ============================================================================
+// WIDTH & HEIGHT
+// ============================================================================
+
+.w-full { width: 100%; }
+.w-auto { width: auto; }
+.w-screen { width: 100vw; }
+.w-fit { width: fit-content; }
+
+.h-full { height: 100%; }
+.h-auto { height: auto; }
+.h-screen { height: 100vh; }
+.h-fit { height: fit-content; }
+
+.min-h-screen { min-height: 100vh; }
+.min-h-full { min-height: 100%; }
+
+.max-w-sm { max-width: 640px; }
+.max-w-md { max-width: 768px; }
+.max-w-lg { max-width: 1024px; }
+.max-w-xl { max-width: 1280px; }
+.max-w-2xl { max-width: 1536px; }
+.max-w-full { max-width: 100%; }
+
+// ============================================================================
+// POSITION UTILITIES
+// ============================================================================
+
+.relative { position: relative; }
+.absolute { position: absolute; }
+.fixed { position: fixed; }
+.sticky { position: sticky; }
+.static { position: static; }
+
+.inset-0 {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.top-0 { top: 0; }
+.right-0 { right: 0; }
+.bottom-0 { bottom: 0; }
+.left-0 { left: 0; }
+
+// ============================================================================
+// Z-INDEX
+// ============================================================================
+
+.z-0 { z-index: $z-base; }
+.z-10 { z-index: 10; }
+.z-20 { z-index: 20; }
+.z-30 { z-index: 30; }
+.z-40 { z-index: 40; }
+.z-50 { z-index: 50; }
+.z-dropdown { z-index: $z-dropdown; }
+.z-modal { z-index: $z-modal; }
+
+// ============================================================================
+// BORDER RADIUS
+// ============================================================================
+
+.rounded-none { border-radius: 0; }
+.rounded-sm { border-radius: $radius-sm; }
+.rounded { border-radius: $radius-md; }
+.rounded-md { border-radius: $radius-md; }
+.rounded-lg { border-radius: $radius-lg; }
+.rounded-xl { border-radius: $radius-xl; }
+.rounded-2xl { border-radius: $radius-2xl; }
+.rounded-full { border-radius: $radius-full; }
+
+// ============================================================================
+// SHADOWS
+// ============================================================================
+
+.shadow-none { box-shadow: none; }
+.shadow-sm { box-shadow: $shadow-sm; }
+.shadow { box-shadow: $shadow-base; }
+.shadow-md { box-shadow: $shadow-md; }
+.shadow-lg { box-shadow: $shadow-lg; }
+.shadow-xl { box-shadow: $shadow-xl; }
+.shadow-warm { box-shadow: $shadow-warm; }
+.shadow-glow { box-shadow: $shadow-glow; }
+
+// ============================================================================
+// OPACITY
+// ============================================================================
+
+@for $i from 0 through 10 {
+  .opacity-#{$i * 10} {
+    opacity: $i * 0.1;
+  }
+}
+
+// ============================================================================
+// OVERFLOW
+// ============================================================================
+
+.overflow-auto { overflow: auto; }
+.overflow-hidden { overflow: hidden; }
+.overflow-visible { overflow: visible; }
+.overflow-scroll { overflow: scroll; }
+.overflow-x-auto { overflow-x: auto; }
+.overflow-y-auto { overflow-y: auto; }
+
+// ============================================================================
+// CURSOR
+// ============================================================================
+
+.cursor-pointer { cursor: pointer; }
+.cursor-default { cursor: default; }
+.cursor-not-allowed { cursor: not-allowed; }
+.cursor-wait { cursor: wait; }
+.cursor-move { cursor: move; }
+
+// ============================================================================
+// POINTER EVENTS
+// ============================================================================
+
+.pointer-events-none { pointer-events: none; }
+.pointer-events-auto { pointer-events: auto; }
+
+// ============================================================================
+// USER SELECT
+// ============================================================================
+
+.select-none { user-select: none; }
+.select-text { user-select: text; }
+.select-all { user-select: all; }
+.select-auto { user-select: auto; }
+
+// ============================================================================
+// OBJECT FIT
+// ============================================================================
+
+.object-contain { object-fit: contain; }
+.object-cover { object-fit: cover; }
+.object-fill { object-fit: fill; }
+.object-none { object-fit: none; }
+.object-scale-down { object-fit: scale-down; }
+
+// ============================================================================
+// TRANSFORM UTILITIES
+// ============================================================================
+
+.scale-75 { transform: scale(0.75); }
+.scale-90 { transform: scale(0.9); }
+.scale-95 { transform: scale(0.95); }
+.scale-100 { transform: scale(1); }
+.scale-105 { transform: scale(1.05); }
+.scale-110 { transform: scale(1.1); }
+.scale-125 { transform: scale(1.25); }
+
+.rotate-45 { transform: rotate(45deg); }
+.rotate-90 { transform: rotate(90deg); }
+.rotate-180 { transform: rotate(180deg); }
+
+// ============================================================================
+// TRANSITION UTILITIES
+// ============================================================================
+
+.transition-none { transition: none; }
+.transition-all { @include smooth-transition(all); }
+.transition-colors { @include smooth-transition((color, background-color, border-color)); }
+.transition-opacity { @include smooth-transition(opacity); }
+.transition-transform { @include smooth-transition(transform); }
+
+// ============================================================================
+// GRADIENT UTILITIES
+// ============================================================================
+
+.bg-flame-gradient {
+  @include flame-gradient;
+}
+
+.bg-hearth-gradient {
+  @include hearth-gradient;
+}
+
+.bg-gradient-warm {
+  background: $gradient-warm;
+}
+
+.text-gradient {
+  @include gradient-text;
+}
+
+.text-flame-gradient {
+  @include gradient-text($gradient-flame);
+}
+
+// ============================================================================
+// GLASS EFFECTS
+// ============================================================================
+
+.glass {
+  @include glassmorphism;
+}
+
+.glass-dark {
+  @include glassmorphism(15px, 0.05);
+  background: rgba($charcoal-dark, 0.1);
+}
+
+// ============================================================================
+// HOVER EFFECTS
+// ============================================================================
+
+.hover-lift {
+  @include hover-lift;
+}
+
+.hover-scale {
+  @include hover-scale;
+}
+
+.hover-glow:hover {
+  @include glow($flame-orange);
+}
+
+// ============================================================================
+// WEB3 SPECIFIC
+// ============================================================================
+
+.web3-glow {
+  animation: flameGlow 2s ease-in-out infinite;
+}
+
+.web3-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.web3-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.web3-flicker {
+  animation: flicker 2s ease-in-out infinite;
+}
+
+// ============================================================================
+// SCROLLBAR UTILITIES
+// ============================================================================
+
+.scrollbar-thin {
+  @include custom-scrollbar(4px);
+}
+
+.scrollbar-default {
+  @include custom-scrollbar(8px);
+}
+
+.scrollbar-hide {
+  scrollbar-width: none;
+  
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

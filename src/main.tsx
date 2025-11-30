@@ -9,6 +9,7 @@ import HomePage from "./pages/homepage.tsx";
 import CreatorPage from "./pages/creatorPage.tsx";
 import { PrivyProvider } from "@privy-io/react-auth"
 import { OAuthCallback } from "./pages/callback.tsx";
+import "./styles/main.scss"; 
 
 const router = createBrowserRouter([
   {

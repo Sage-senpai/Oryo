@@ -1,0 +1,538 @@
+/**
+ * ============================================================================
+ * ORYO - Form Components
+ * ============================================================================
+ * Location: src/styles/components/_forms.scss
+ * 
+ * Input fields, textareas, selects with beautiful styling
+ * ============================================================================
+ */
+
+// ============================================================================
+// FORM GROUP
+// ============================================================================
+
+.form-group {
+  margin-bottom: $space-6;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// ============================================================================
+// LABELS
+// ============================================================================
+
+.form-label {
+  display: block;
+  font-size: $text-sm;
+  font-weight: $font-medium;
+  color: $charcoal-dark;
+  margin-bottom: $space-2;
+  
+  .required {
+    color: $error;
+    margin-left: $space-1;
+  }
+  
+  .optional {
+    color: $dark-gray;
+    font-weight: $font-normal;
+    font-size: $text-xs;
+    margin-left: $space-2;
+  }
+}
+
+// ============================================================================
+// INPUT FIELDS
+// ============================================================================
+
+.form-input {
+  width: 100%;
+  padding: $space-3 $space-4;
+  font-size: $text-base;
+  font-family: $font-body;
+  color: $charcoal-dark;
+  background: $white;
+  border: 2px solid $medium-gray;
+  border-radius: $radius-lg;
+  @include smooth-transition((border-color, box-shadow, background));
+  
+  &::placeholder {
+    color: $dark-gray;
+    opacity: 0.6;
+  }
+  
+  &:hover {
+    border-color: darken($medium-gray, 10%);
+  }
+  
+  &:focus {
+    outline: none;
+    border-color: $flame-orange;
+    box-shadow: 0 0 0 3px rgba($flame-orange, 0.1);
+    background: $white;
+  }
+  
+  &:disabled {
+    background: $light-gray;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  
+  &.error {
+    border-color: $error;
+    
+    &:focus {
+      box-shadow: 0 0 0 3px rgba($error, 0.1);
+    }
+  }
+  
+  &.success {
+    border-color: $success;
+    
+    &:focus {
+      box-shadow: 0 0 0 3px rgba($success, 0.1);
+    }
+  }
+}
+
+// ============================================================================
+// INPUT SIZES
+// ============================================================================
+
+.form-input-sm {
+  padding: $space-2 $space-3;
+  font-size: $text-sm;
+}
+
+.form-input-lg {
+  padding: $space-4 $space-5;
+  font-size: $text-lg;
+}
+
+// ============================================================================
+// INPUT WITH ICON
+// ============================================================================
+
+.input-group {
+  position: relative;
+  
+  .input-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    color: $dark-gray;
+    
+    &.left {
+      left: $space-4;
+    }
+    
+    &.right {
+      right: $space-4;
+    }
+  }
+  
+  &.has-icon-left .form-input {
+    padding-left: $space-10;
+  }
+  
+  &.has-icon-right .form-input {
+    padding-right: $space-10;
+  }
+}
+
+// ============================================================================
+// TEXTAREA
+// ============================================================================
+
+.form-textarea {
+  @extend .form-input;
+  min-height: 120px;
+  resize: vertical;
+  font-family: $font-body;
+  line-height: $leading-relaxed;
+  
+  &.resize-none {
+    resize: none;
+  }
+}
+
+// ============================================================================
+// SELECT
+// ============================================================================
+
+.form-select {
+  @extend .form-input;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23646470' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right $space-4 center;
+  background-size: 20px;
+  padding-right: $space-10;
+  cursor: pointer;
+}
+
+// ============================================================================
+// CHECKBOX & RADIO
+// ============================================================================
+
+.form-checkbox,
+.form-radio {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+    
+    &:checked ~ .checkmark {
+      background: $gradient-flame;
+      border-color: $flame-orange;
+      
+      &::after {
+        display: block;
+      }
+    }
+    
+    &:disabled ~ .checkmark {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+  
+  .checkmark {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border: 2px solid $medium-gray;
+    border-radius: $radius-sm;
+    background: $white;
+    @include smooth-transition((background, border-color));
+    
+    &::after {
+      content: '';
+      position: absolute;
+      display: none;
+      left: 6px;
+      top: 2px;
+      width: 5px;
+      height: 10px;
+      border: solid $white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+  }
+  
+  .label-text {
+    margin-left: $space-3;
+    font-size: $text-sm;
+    color: $charcoal-dark;
+  }
+  
+  &:hover input ~ .checkmark {
+    border-color: $flame-orange;
+  }
+}
+
+.form-radio {
+  .checkmark {
+    border-radius: $radius-full;
+    
+    &::after {
+      left: 4px;
+      top: 4px;
+      width: 8px;
+      height: 8px;
+      border-radius: $radius-full;
+      border: none;
+      background: $white;
+      transform: none;
+    }
+  }
+}
+
+// ============================================================================
+// SWITCH TOGGLE
+// ============================================================================
+
+.form-switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    
+    &:checked ~ .switch-slider {
+      background: $gradient-flame;
+      
+      &::before {
+        transform: translateX(24px);
+      }
+    }
+    
+    &:disabled ~ .switch-slider {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+  
+  .switch-slider {
+    position: relative;
+    width: 48px;
+    height: 24px;
+    background: $medium-gray;
+    border-radius: $radius-full;
+    @include smooth-transition(background);
+    
+    &::before {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      left: 2px;
+      top: 2px;
+      background: $white;
+      border-radius: $radius-full;
+      @include smooth-transition(transform);
+      box-shadow: $shadow-sm;
+    }
+  }
+  
+  .label-text {
+    margin-left: $space-3;
+    font-size: $text-sm;
+    color: $charcoal-dark;
+  }
+}
+
+// ============================================================================
+// HELP TEXT & ERROR MESSAGE
+// ============================================================================
+
+.form-help {
+  display: block;
+  margin-top: $space-2;
+  font-size: $text-xs;
+  color: $dark-gray;
+  line-height: $leading-relaxed;
+}
+
+.form-error {
+  @extend .form-help;
+  color: $error;
+  display: flex;
+  align-items: center;
+  gap: $space-1;
+  
+  svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+}
+
+.form-success {
+  @extend .form-help;
+  color: $success;
+}
+
+// ============================================================================
+// INPUT AMOUNT (For tip amounts)
+// ============================================================================
+
+.input-amount {
+  position: relative;
+  
+  .form-input {
+    font-size: $text-2xl;
+    font-weight: $font-bold;
+    text-align: center;
+    padding: $space-5 $space-16;
+    @include gradient-text;
+  }
+  
+  .currency-symbol {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: $text-xl;
+    font-weight: $font-bold;
+    color: $dark-gray;
+    
+    &.left {
+      left: $space-6;
+    }
+    
+    &.right {
+      right: $space-6;
+    }
+  }
+}
+
+// ============================================================================
+// QUICK AMOUNT SELECTOR
+// ============================================================================
+
+.amount-selector {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $space-3;
+  margin-bottom: $space-6;
+  
+  @include respond-to('md') {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .amount-option {
+    padding: $space-4;
+    border: 2px solid $medium-gray;
+    border-radius: $radius-lg;
+    text-align: center;
+    cursor: pointer;
+    @include smooth-transition((border-color, background, transform));
+    
+    &:hover {
+      border-color: $flame-orange;
+      background: rgba($flame-orange, 0.05);
+    }
+    
+    &.active {
+      border-color: $flame-orange;
+      background: $gradient-flame;
+      color: $white;
+      transform: scale(1.05);
+    }
+    
+    .amount {
+      font-size: $text-2xl;
+      font-weight: $font-bold;
+      display: block;
+      margin-bottom: $space-1;
+    }
+    
+    .currency {
+      font-size: $text-xs;
+      opacity: 0.8;
+    }
+  }
+}
+
+// ============================================================================
+// FILE UPLOAD
+// ============================================================================
+
+.file-upload {
+  position: relative;
+  
+  input[type="file"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .file-upload-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: $space-3;
+    padding: $space-8;
+    border: 2px dashed $medium-gray;
+    border-radius: $radius-xl;
+    cursor: pointer;
+    @include smooth-transition((border-color, background));
+    
+    &:hover {
+      border-color: $flame-orange;
+      background: rgba($flame-orange, 0.05);
+    }
+    
+    &.drag-over {
+      border-color: $flame-orange;
+      background: rgba($flame-orange, 0.1);
+    }
+    
+    svg {
+      width: 48px;
+      height: 48px;
+      color: $dark-gray;
+    }
+    
+    .upload-text {
+      font-size: $text-sm;
+      color: $charcoal-dark;
+      
+      strong {
+        color: $flame-orange;
+      }
+    }
+    
+    .upload-hint {
+      font-size: $text-xs;
+      color: $dark-gray;
+    }
+  }
+}
+
+// ============================================================================
+// SEARCH INPUT
+// ============================================================================
+
+.search-input {
+  position: relative;
+  
+  .form-input {
+    padding-left: $space-10;
+    border-radius: $radius-full;
+  }
+  
+  .search-icon {
+    position: absolute;
+    left: $space-4;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    color: $dark-gray;
+  }
+  
+  .clear-button {
+    position: absolute;
+    right: $space-3;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    @include flex-center;
+    background: $light-gray;
+    border: none;
+    border-radius: $radius-full;
+    cursor: pointer;
+    opacity: 0;
+    @include smooth-transition((opacity, background));
+    
+    &.visible {
+      opacity: 1;
+    }
+    
+    &:hover {
+      background: $medium-gray;
+    }
+  }
+}
