@@ -33,7 +33,7 @@ export function WalletProvider({ children }: { children: ReactNode }) {
         // Check if polkadot.js extension is available
         const { web3Enable, web3Accounts } = await import("@polkadot/extension-dapp")
   
-        const extensions = await web3Enable("DOTip")
+        const extensions = await web3Enable("ORYO App")
         if (extensions.length === 0) {
           alert("Please install Polkadot.js extension to connect your wallet")
           setIsConnecting(false)

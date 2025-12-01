@@ -45,11 +45,11 @@ export function Header() {
   console.log("Header - ready:", ready, "authenticated:", authenticated, "user:", user);
 
   return (
-    <header className="border-b border-border/50 backdrop-blur-sm sticky top-0 z-50 bg-background/80">
+    <header className="bg-white/80 backdrop-blur-sm border-b border-[#E6DCD2] sticky top-0 z-50">
       <div className="container mx-auto px-4 pr-0 py-4 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
           <div className="w-8 h-8 rounded-full bg-linear-to-br from-pink-500  to-yellow-500" />
-          <span className="text-xl font-bold">DOTIP</span>
+          <span className="text-xl font-bold">ORYO</span>
         </Link>
         <div className="flex items-center justify-between gap-8">
           {account ? (

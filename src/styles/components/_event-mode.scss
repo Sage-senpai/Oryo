@@ -1,0 +1,476 @@
+/**
+ * ============================================================================
+ * ORYO - Event Mode Styles
+ * ============================================================================
+ * Location: src/styles/components/_event-mode.scss
+ * 
+ * Import this in your main.scss:
+ * @import './components/event-mode';
+ */
+
+// ============================================================================
+// EVENT MODE PAGE
+// ============================================================================
+
+.event-mode {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #0E4D5F 0%, #1A6B7F 100%);
+  position: relative;
+  overflow: hidden;
+
+  // Animated background glow
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(242, 165, 65, 0.15) 0%, transparent 50%);
+    animation: pulse 4s ease-in-out infinite;
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+    padding: 2rem 1rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  &__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  &__title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  &__subtitle {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  &__scanner-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 400px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  &__scanner {
+    width: 100%;
+    aspect-ratio: 1;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 24px;
+    padding: 1.5rem;
+    position: relative;
+    margin-bottom: 2rem;
+  }
+
+  &__scanner-frame {
+    width: 100%;
+    height: 100%;
+    border: 3px solid rgba(242, 165, 65, 0.8);
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+
+    // Corner decorations
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border: 4px solid #F2A541;
+    }
+
+    &::before {
+      top: 0;
+      left: 0;
+      border-right: none;
+      border-bottom: none;
+      border-top-left-radius: 16px;
+    }
+
+    &::after {
+      bottom: 0;
+      right: 0;
+      border-left: none;
+      border-top: none;
+      border-bottom-right-radius: 16px;
+    }
+  }
+
+  &__scanner-corners {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border: 4px solid #F2A541;
+    }
+
+    &::before {
+      top: 0;
+      right: 0;
+      border-left: none;
+      border-bottom: none;
+      border-top-right-radius: 16px;
+    }
+
+    &::after {
+      bottom: 0;
+      left: 0;
+      border-right: none;
+      border-top: none;
+      border-bottom-left-radius: 16px;
+    }
+  }
+
+  &__scan-line {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #F2A541, transparent);
+    top: 50%;
+    transform: translateY(-50%);
+    animation: scan 2s ease-in-out infinite;
+    box-shadow: 0 0 10px #F2A541;
+  }
+
+  &__qr-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgba(255, 255, 255, 0.3);
+    
+    svg {
+      width: 120px;
+      height: 120px;
+    }
+  }
+
+  &__instructions {
+    text-align: center;
+    color: white;
+    margin-bottom: 2rem;
+
+    p {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      opacity: 0.9;
+    }
+
+    small {
+      font-size: 0.875rem;
+      opacity: 0.7;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  &__action-btn {
+    flex: 1;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+
+    &--primary {
+      background: linear-gradient(135deg, #F2A541 0%, #FF686B 100%);
+      border: none;
+
+      &:hover {
+        background: linear-gradient(135deg, #e89430 0%, #ff575a 100%);
+      }
+    }
+  }
+
+  &__recent {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 1.5rem;
+  }
+
+  &__recent-title {
+    color: white;
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  &__recent-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}
+
+// Recent Scan Item
+.recent-scan-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  &__avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #F2A541 0%, #FF686B 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  &__info {
+    flex: 1;
+  }
+
+  &__name {
+    font-weight: 600;
+    color: white;
+    margin-bottom: 0.125rem;
+    font-size: 0.9375rem;
+  }
+
+  &__time {
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  &__amount {
+    font-weight: 700;
+    color: #6ED1C5;
+    font-size: 0.9375rem;
+  }
+}
+
+// ============================================================================
+// MY QR CODE MODAL
+// ============================================================================
+
+.my-qr-modal {
+  &__overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  &__content {
+    background: white;
+    border-radius: 24px;
+    padding: 2rem;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+  }
+
+  &__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #FFF8F0;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: #FFE8D6;
+    }
+
+    svg {
+      width: 18px;
+      height: 18px;
+      color: #0E4D5F;
+    }
+  }
+
+  &__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #0E4D5F;
+    margin-bottom: 0.5rem;
+  }
+
+  &__subtitle {
+    font-size: 0.875rem;
+    color: #999;
+    margin-bottom: 2rem;
+  }
+
+  &__qr-container {
+    background: #FFF8F0;
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  &__qr-code {
+    width: 240px;
+    height: 240px;
+    background: white;
+    border-radius: 16px;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+    svg {
+      width: 200px;
+      height: 200px;
+      color: #0E4D5F;
+    }
+  }
+
+  &__username {
+    font-weight: 600;
+    color: #0E4D5F;
+    font-size: 1.125rem;
+  }
+
+  &__share-btn {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, #F2A541 0%, #FF686B 100%);
+    color: white;
+    border: none;
+    border-radius: 16px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(242, 165, 65, 0.3);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}
+
+// ============================================================================
+// ANIMATIONS
+// ============================================================================
+
+@keyframes scan {
+  0%, 100% {
+    top: 0;
+  }
+  50% {
+    top: 100%;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}

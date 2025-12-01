@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Heart, Users, Copy, Check } from "lucide-react"
 import { useState } from "react"
-import { TipModal } from "@/components/tipModal"
+import {TipFlowModal} from "@/components/TipFlowModal"
 
 interface Creator {
   id: string
@@ -175,7 +175,7 @@ export function CreatorProfile({ creator }: CreatorProfileProps) {
         </div>
       </main>
 
-      <TipModal open={showTipModal} onOpenChange={setShowTipModal} creator={creator} amount={tipAmount} />
+      <TipFlowModal isOpen={showTipModal} onClose={() => setShowTipModal(false)} creator={creator} amount={tipAmount} />
     </>
   )
 }
