@@ -18,13 +18,10 @@ interface Creator {
   walletAddress: string
 }
 
-interface CreatorProfileProps {
-  creator: Creator
-}
 
 const QUICK_AMOUNTS = [0.1, 0.5, 1, 5]
 
-export function CreatorProfile({ creator }: CreatorProfileProps) {
+export function CreatorProfile({ creator }: { creator: Creator }) {
   const [customAmount, setCustomAmount] = useState("")
   // const [selectedAmount, setSelectedAmount] = useState<number | null>(null)
   const [copied, setCopied] = useState(false)
@@ -56,27 +53,42 @@ export function CreatorProfile({ creator }: CreatorProfileProps) {
   return (
     <>
       <div className="relative">
-        <div className="h-48 md:h-64 bg-linear-to-r from-primary/20 via-secondary/20 to-accent/20 relative overflow-hidden">
-          <img src={creator.banner || "/placeholder.svg"} alt="" className="w-full h-full object-cover opacity-50" />
-        </div>
-        <div className="container mx-auto px-4">
-          <div className="relative -mt-16 md:-mt-20 mb-6">
-            <Avatar className="w-32 h-32 md:w-40 md:h-40 border-4 border-background shadow-xl">
-              <AvatarImage src={creator.avatar || "/placeholder.svg"} alt={creator.name} />
-              <AvatarFallback className="text-3xl">{creator.name.slice(0, 2).toUpperCase()}</AvatarFallback>
-            </Avatar>
-          </div>
-        </div>
-      </div>
+  <div className="h-48 md:h-64 bg-linear-to-r from-primary/20 via-secondary/20 to-accent/20 relative overflow-hidden">
+    <img
+      src={creator?.banner || "/placeholder.svg"}
+      alt={creator?.name || "Creator Banner"}
+      className="w-full h-full object-cover opacity-50"
+    />
+  </div>
+  <div className="container mx-auto px-4">
+    <div className="relative -mt-16 md:-mt-20 mb-6">
+      <Avatar className="w-32 h-32 md:w-40 md:h-40 border-4 border-background shadow-xl">
+        <AvatarImage
+          src={creator?.avatar || "/placeholder.svg"}
+          alt={creator?.name || "Creator Avatar"}
+        />
+        <AvatarFallback className="text-3xl">
+          {creator?.name ? creator.name.slice(0, 2).toUpperCase() : "CR"}
+        </AvatarFallback>
+      </Avatar>
+    </div>
+  </div>
+</div>
+
 
       <main className="container mx-auto px-4 pb-12">
         <div className="grid lg:grid-cols-3  gap-8">
           <div className="lg:col-span-2 space-y-6">
-            <div>
-              <h1 className="text-3xl md:text-4xl font-bold mb-2">{creator.name}</h1>
-              <p className="text-lg text-muted-foreground mb-4">{creator.username}</p>
-              <p className="text-foreground leading-relaxed">{creator.bio}</p>
-            </div>
+            <h1 className="text-3xl md:text-4xl font-bold mb-2">
+  {creator?.name || "Unknown Creator"}
+</h1>
+<p className="text-lg text-muted-foreground mb-4">
+  {creator?.username || "@unknown"}
+</p>
+<p className="text-foreground leading-relaxed">
+  {creator?.bio || "No bio available."}
+</p>
+
 
             <Card className="border-border/50">
               <CardContent className="p-6">
@@ -86,14 +98,18 @@ export function CreatorProfile({ creator }: CreatorProfileProps) {
                       <Heart className="w-5 h-5" />
                       <span className="text-sm font-medium">Total Tips</span>
                     </div>
-                    <p className="text-2xl font-bold text-primary">{creator.totalTips.toFixed(1)} DOT</p>
+                    <p className="text-2xl font-bold text-primary">
+  {creator?.totalTips?.toFixed(1) || "0.0"} DOT
+</p>
                   </div>
                   <div>
                     <div className="flex items-center gap-2 text-muted-foreground mb-2">
                       <Users className="w-5 h-5" />
                       <span className="text-sm font-medium">Supporters</span>
                     </div>
-                    <p className="text-2xl font-bold">{creator.supporters}</p>
+                   <p className="text-2xl font-bold">
+  {creator?.supporters || 0}
+</p>
                   </div>
                 </div>
               </CardContent>
@@ -103,9 +119,9 @@ export function CreatorProfile({ creator }: CreatorProfileProps) {
               <CardContent className="p-6">
                 <h3 className="font-semibold mb-2">Wallet Address</h3>
                 <div className="flex items-center gap-2">
-                  <code className="flex-1 text-xs md:text-sm bg-muted px-3 py-2 rounded-lg truncate font-mono">
-                    {creator.walletAddress}
-                  </code>
+                 <code className="flex-1 text-xs md:text-sm bg-muted px-3 py-2 rounded-lg truncate font-mono">
+  {creator?.walletAddress || "Not available"}
+</code>
                   <Button variant="outline" size="icon" onClick={handleCopyAddress} className="shrink-0 bg-transparent">
                     {copied ? <Check className="w-4 h-4 text-primary" /> : <Copy className="w-4 h-4" />}
                   </Button>

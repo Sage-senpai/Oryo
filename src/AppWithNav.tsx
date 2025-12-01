@@ -1,0 +1,38 @@
+import { BottomNav } from "./components/oryo/BottomNav";
+import App from "./App";
+import { useLocation, useNavigate } from "react-router";
+
+export default function AppWithNav() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const routeToNav = {
+    "/": "home",
+    "/discover": "discover",
+    "/wallet": "wallet",
+    "/communities": "communities",
+    "/CreatorProfile": "profile",
+  } as const;
+
+  const currentActive =
+    (routeToNav as any)[location.pathname] ?? "home";
+
+  const navToRoute = {
+    home: "/",
+    discover: "/discover",
+    wallet: "/wallet",
+    communities: "/communities",
+    profile: "/profile",
+  } as const;
+
+  const handleNavigate = (item: keyof typeof navToRoute) => {
+    navigate(navToRoute[item]);
+  };
+
+  return (
+    <>
+      <App />
+      <BottomNav active={currentActive} onNavigate={handleNavigate} />
+    </>
+  );
+}

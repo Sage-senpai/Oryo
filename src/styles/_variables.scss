@@ -1,52 +1,79 @@
 /**
  * ============================================================================
- * ORYO - Design Variables & Tokens
+ * ORYO - Enhanced Design Variables (Vibrant Edition)
  * ============================================================================
  * Location: src/styles/_variables.scss
  * 
- * Brand colors inspired by the warmth of Hestia's hearth
- * All design tokens centralized for easy customization
+ * Brighter, more vibrant color palette with orange and teal as heroes
  * ============================================================================
  */
 
 // ============================================================================
-// BRAND COLORS - Oryo Flame Palette
+// PRIMARY BRAND COLORS - Enhanced & Vibrant
 // ============================================================================
 
-// Primary Colors
-$flame-orange: #F2A541;      // Main brand color - warm flame
-$deep-teal: #0E4D5F;         // Secondary - stable foundation
-$coral-pink: #FF686B;        // Accent - generous warmth
-$warm-cream: #FFF8F0;        // Background - welcoming light
-$charcoal: #6ED1C5;          // Highlight - digital energy
+// Main Heroes
+$flame-orange: #F2A541;      // Primary - Warm flame (unchanged)
+$deep-teal: #0E4D5F;         // Secondary - Deep ocean (unchanged)
 
-// Neutral Palette
+// Supporting Cast
+$coral-pink: #FF686B;        // Accent - Warm coral
+$sunset-orange: #FF8C42;     // New - Vibrant sunset
+$electric-teal: #1A9BA8;     // New - Bright teal
+$mint-green: #6ED1C5;        // Highlight - Fresh mint
+
+// Backgrounds - More saturated
+$warm-cream: #FFF5E8;        // Warmer cream
+$soft-peach: #FFE8D6;        // Peachy background
+$light-teal: #E6F7F9;        // Light teal bg
+$off-white: #FEFCF8;         // Slightly warm white
+
+// Neutrals - Less gray, more warmth
 $white: #FFFFFF;
-$off-white: #FAF6F2;
-$light-gray: #F5F0EB;
-$medium-gray: #E6DCD2;
-$dark-gray: #646470;
+$warm-gray-50: #FAF8F5;
+$warm-gray-100: #F5F0EB;
+$warm-gray-200: #E8DFD6;
+$warm-gray-300: #D4C7B8;
+$warm-gray-600: #8B7E6E;
+$warm-gray-900: #3D352C;
 $charcoal-dark: #1E1E23;
+$charcoal: #33333A;
 $black: #000000;
+$dark-gray: #2a2a2a;
+$light-gray: #E0E0E0;
+$medium-gray: #B0B0B0;
+$gray-overlay: rgba(0, 0, 0, 0.5);
 
-// Semantic Colors
-$success: #10B981;
-$warning: #F59E0B;
-$error: #EF4444;
-$info: #3B82F6;
 
-// ============================================================================
-// GRADIENTS - Signature Oryo Effects
-// ============================================================================
-$gradient-flame: linear-gradient(135deg, $flame-orange 0%, $coral-pink 100%);
-$gradient-hearth: linear-gradient(135deg, $flame-orange 0%, $deep-teal 50%, $coral-pink 100%);
-$gradient-warm: linear-gradient(180deg, $warm-cream 0%, $off-white 100%);
-$gradient-dark: linear-gradient(135deg, $deep-teal 0%, $charcoal-dark 100%);
-$gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+// Semantic Colors - More vibrant
+$success: #2DD4BF;          // Bright teal success
+$warning: #FBBF24;          // Bright amber
+$error: #F87171;            // Bright red
+$info: #60A5FA;             // Bright blue
 
 // ============================================================================
-// TYPOGRAPHY
+// GRADIENTS - Vibrant & Eye-catching
 // ============================================================================
+
+$gradient-primary: linear-gradient(135deg, #F2A541 0%, #FF8C42 100%);
+$gradient-secondary: linear-gradient(135deg, #0E4D5F 0%, #1A9BA8 100%);
+$gradient-flame: linear-gradient(135deg, #FF8C42 0%, #F2A541 50%, #FF686B 100%);
+$gradient-ocean: linear-gradient(135deg, #0E4D5F 0%, #1A9BA8 50%, #6ED1C5 100%);
+$gradient-sunset: linear-gradient(135deg, #FF686B 0%, #F2A541 50%, #FBBF24 100%);
+$gradient-warm: linear-gradient(180deg, #FFF5E8 0%, #FFE8D6 100%);
+$gradient-cool: linear-gradient(180deg, #E6F7F9 0%, #FEFCF8 100%);
+$gradient-hero: linear-gradient(135deg, #0E4D5F 0%, #F2A541 50%, #FF686B 100%);
+$gradient-accent: linear-gradient(135deg, #FF8C42 0%, #1A9BA8 100%);
+$gradient-hearth: linear-gradient(135deg, #F2A541 0%, #0E4D5F 50%, #FF686B 100%);
+
+// Overlay gradients for cards
+$gradient-card-warm: linear-gradient(135deg, rgba(242, 165, 65, 0.05) 0%, rgba(255, 104, 107, 0.05) 100%);
+$gradient-card-cool: linear-gradient(135deg, rgba(14, 77, 95, 0.05) 0%, rgba(110, 209, 197, 0.05) 100%);
+
+// ============================================================================
+// TYPOGRAPHY - Same as before but with better defaults
+// ============================================================================
+
 $font-heading: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
 $font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 $font-mono: 'SF Mono', 'Monaco', 'Cascadia Code', 'Courier New', monospace;
@@ -78,8 +105,9 @@ $leading-normal: 1.5;
 $leading-relaxed: 1.75;
 
 // ============================================================================
-// SPACING SCALE - Consistent rhythm
+// SPACING SCALE
 // ============================================================================
+
 $space-1: 0.25rem;   // 4px
 $space-2: 0.5rem;    // 8px
 $space-3: 0.75rem;   // 12px
@@ -94,50 +122,60 @@ $space-20: 5rem;     // 80px
 $space-24: 6rem;     // 96px
 
 // ============================================================================
-// BORDER RADIUS - Soft, welcoming curves
+// BORDER RADIUS - More pronounced
 // ============================================================================
-$radius-sm: 0.375rem;    // 6px
-$radius-md: 0.5rem;      // 8px
-$radius-lg: 0.75rem;     // 12px
-$radius-xl: 1rem;        // 16px
-$radius-2xl: 1.5rem;     // 24px
+
+$radius-sm: 0.5rem;      // 8px (increased)
+$radius-md: 0.75rem;     // 12px (increased)
+$radius-lg: 1rem;        // 16px (increased)
+$radius-xl: 1.5rem;      // 24px (increased)
+$radius-2xl: 2rem;       // 32px (increased)
 $radius-full: 9999px;    // Circular
 
 // ============================================================================
-// SHADOWS - Depth and elevation
+// SHADOWS - More dramatic
 // ============================================================================
-$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-$shadow-base: 0 2px 8px 0 rgba(0, 0, 0, 0.08);
-$shadow-md: 0 4px 12px 0 rgba(0, 0, 0, 0.1);
-$shadow-lg: 0 8px 24px 0 rgba(0, 0, 0, 0.12);
-$shadow-xl: 0 16px 48px 0 rgba(0, 0, 0, 0.15);
-$shadow-warm: 0 4px 20px 0 rgba(242, 165, 65, 0.15);
-$shadow-glow: 0 0 24px 0 rgba(242, 165, 65, 0.3);
+
+$shadow-sm: 0 2px 4px 0 rgba(242, 165, 65, 0.08);
+$shadow-base: 0 4px 12px 0 rgba(242, 165, 65, 0.12);
+$shadow-md: 0 6px 16px 0 rgba(242, 165, 65, 0.15);
+$shadow-lg: 0 10px 24px 0 rgba(242, 165, 65, 0.18);
+$shadow-xl: 0 16px 40px 0 rgba(242, 165, 65, 0.22);
+$shadow-warm: 0 8px 24px 0 rgba(242, 165, 65, 0.25);
+$shadow-glow: 0 0 32px 0 rgba(242, 165, 65, 0.4);
+$shadow-teal: 0 8px 24px 0 rgba(14, 77, 95, 0.2);
+
+// Colored shadows for cards
+$shadow-card-orange: 0 8px 24px rgba(242, 165, 65, 0.15), 0 0 0 1px rgba(242, 165, 65, 0.08);
+$shadow-card-teal: 0 8px 24px rgba(14, 77, 95, 0.15), 0 0 0 1px rgba(14, 77, 95, 0.08);
 
 // ============================================================================
-// BREAKPOINTS - Mobile-first responsive design
+// BREAKPOINTS
 // ============================================================================
-$breakpoint-sm: 640px;   // Mobile landscape
-$breakpoint-md: 768px;   // Tablet
-$breakpoint-lg: 1024px;  // Desktop
-$breakpoint-xl: 1280px;  // Large desktop
-$breakpoint-2xl: 1536px; // Extra large
+
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+$breakpoint-2xl: 1536px;
 
 // ============================================================================
-// TRANSITIONS & ANIMATIONS
+// TRANSITIONS & ANIMATIONS - Snappier
 // ============================================================================
-$transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-$transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
-$transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
-$transition-bounce: 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+$transition-fast: 120ms cubic-bezier(0.4, 0, 0.2, 1);
+$transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+$transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+$transition-bounce: 400ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
 $easing-smooth: cubic-bezier(0.4, 0, 0.2, 1);
 $easing-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
 $easing-elastic: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
 // ============================================================================
-// Z-INDEX LAYERS - Stacking context
+// Z-INDEX LAYERS
 // ============================================================================
+
 $z-base: 0;
 $z-dropdown: 1000;
 $z-sticky: 1020;
@@ -150,14 +188,19 @@ $z-tooltip: 1070;
 // ============================================================================
 // CONTAINER & LAYOUT
 // ============================================================================
+
 $container-max-width: 1280px;
 $container-padding: $space-4;
 
 // ============================================================================
-// WEB3 SPECIFIC - Blockchain & Crypto aesthetics
+// WEB3 GLOWS - More intense
 // ============================================================================
-$glow-primary: 0 0 20px rgba($flame-orange, 0.5);
-$glow-secondary: 0 0 20px rgba($deep-teal, 0.5);
-$glow-accent: 0 0 20px rgba($coral-pink, 0.5);
 
-$border-gradient: linear-gradient(135deg, $flame-orange, $coral-pink);
+$glow-primary: 0 0 24px rgba($flame-orange, 0.6);
+$glow-secondary: 0 0 24px rgba($deep-teal, 0.6);
+$glow-accent: 0 0 24px rgba($coral-pink, 0.6);
+$glow-success: 0 0 24px rgba($success, 0.6);
+
+// Pulsing glows
+$glow-pulse-orange: 0 0 20px rgba($flame-orange, 0.4), 0 0 40px rgba($flame-orange, 0.2);
+$glow-pulse-teal: 0 0 20px rgba($deep-teal, 0.4), 0 0 40px rgba($deep-teal, 0.2);
