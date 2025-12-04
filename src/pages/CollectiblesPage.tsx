@@ -36,7 +36,7 @@ export function CollectiblesPage() {
     {
       id: '1',
       name: 'First Flame',
-      description: 'Sent your very first tip on Oryo. Every journey begins with a single step!',
+      description: 'Sent your very first tip on Ekene. Every journey begins with a single step!',
       icon: '🔥',
       isUnlocked: true,
       unlockedDate: 'Nov 15, 2024',
@@ -58,7 +58,7 @@ export function CollectiblesPage() {
     {
       id: '3',
       name: 'Community Builder',
-      description: 'Joined 5 communities. Building connections across the Oryo ecosystem!',
+      description: 'Joined 5 communities. Building connections across the Ekene ecosystem!',
       icon: '🏛️',
       isUnlocked: false,
       progress: { current: 3, total: 5 },
@@ -78,7 +78,7 @@ export function CollectiblesPage() {
     {
       id: '5',
       name: 'Early Adopter',
-      description: 'Joined Oryo in the first month of launch. A true pioneer!',
+      description: 'Joined Ekene in the first month of launch. A true pioneer!',
       icon: '🌟',
       isUnlocked: true,
       unlockedDate: 'Nov 1, 2024',
@@ -145,7 +145,7 @@ export function CollectiblesPage() {
       <div className="collectibles-page__header">
         <h1 className="collectibles-page__title">Your Collectibles</h1>
         <p className="collectibles-page__subtitle">
-          Earn badges by being active in the Oryo community
+          Earn badges by being active in the Ekene community
         </p>
 
         {/* Stats */}

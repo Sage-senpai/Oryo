@@ -1,8 +1,8 @@
 /**
  * ============================================================================
- * ORYO - Enhanced Bottom Navigation (Vibrant)
+ * Ekene - Enhanced Bottom Navigation (Vibrant)
  * ============================================================================
- * Location: src/components/oryo/BottomNav.tsx
+ * Location: src/components/Ekene/BottomNav.tsx
  * 
  * Colorful, animated navigation with floating action button feel
  * ============================================================================

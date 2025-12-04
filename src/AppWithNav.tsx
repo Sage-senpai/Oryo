@@ -1,4 +1,4 @@
-import { BottomNav } from "./components/oryo/BottomNav";
+import { BottomNav } from "./components/Ekene/BottomNav";
 import App from "./App";
 import { useLocation, useNavigate } from "react-router";
 
@@ -11,11 +11,11 @@ export default function AppWithNav() {
     "/discover": "discover",
     "/wallet": "wallet",
     "/communities": "communities",
-    "/CreatorProfile": "profile",
+    "/profile": "profile",
+    "/creator-profile": "profile",
   } as const;
 
-  const currentActive =
-    (routeToNav as any)[location.pathname] ?? "home";
+  const currentActive = (routeToNav as any)[location.pathname] ?? "home";
 
   const navToRoute = {
     home: "/",

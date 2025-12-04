@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { BottomNav } from './oryo/BottomNav';
+import { BottomNav } from './Ekene/BottomNav';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 type NavItem = 'home' | 'discover' | 'wallet' | 'communities' | 'profile';
@@ -31,7 +31,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <div className="oryo-layout">
+    <div className="Ekene-layout">
       <main>{children}</main>
       <BottomNav 
         active={getActiveNav()} 

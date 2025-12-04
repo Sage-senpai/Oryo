@@ -1,5 +1,5 @@
-import {OryoHomeFeed} from './HomeFeed'
+import {EkeneHomeFeed} from './HomeFeed'
 
 export default function HomePage() {
-  return <OryoHomeFeed />
+  return <EkeneHomeFeed />
 }

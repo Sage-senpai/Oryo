@@ -1,11 +1,11 @@
 /**
  * ============================================================================
- * ORYO - Component Styles
+ * Ekene - Component Styles
  * ============================================================================
- * Location: src/styles/components/_oryo-components.scss
+ * Location: src/styles/components/_Ekene-components.scss
  * 
  * Import this in your main.scss:
- * @import './components/oryo-components';
+ * @import './components/Ekene-components';
  */
 
 // ============================================================================
@@ -638,18 +638,18 @@
 // UTILITY CLASSES
 // ============================================================================
 
-.oryo-gradient-text {
+.Ekene-gradient-text {
   background: linear-gradient(135deg, #F2A541 0%, #FF686B 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-.oryo-glow {
+.Ekene-glow {
   box-shadow: 0 4px 20px rgba(242, 165, 65, 0.15);
 }
 
-.oryo-glow-hover {
+.Ekene-glow-hover {
   transition: box-shadow 0.3s ease;
 
   &:hover {

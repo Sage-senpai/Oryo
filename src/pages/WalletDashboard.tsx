@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * ORYO - Vibrant Wallet Dashboard
+ * Ekene - Vibrant Wallet Dashboard
  * ============================================================================
  * Location: src/pages/WalletDashboard.tsx
  * 
@@ -63,8 +63,8 @@ export function WalletDashboard() {
     },
     {
       id: '2',
-      name: 'ORYO Token',
-      symbol: 'ORYO',
+      name: 'Ekene Token',
+      symbol: 'Ekene',
       icon: '🔥',
       balance: '2,450',
       usdValue: '$245.00',
@@ -105,7 +105,7 @@ export function WalletDashboard() {
     {
       id: '3',
       type: 'swap',
-      title: 'Swapped DOT → ORYO',
+      title: 'Swapped DOT → Ekene',
       amount: '10.0 DOT',
       usdValue: '$61.30',
       timestamp: 'Yesterday'
@@ -145,7 +145,7 @@ export function WalletDashboard() {
           <div className="text-center mb-8">
             <div className="flex items-center justify-center gap-2 mb-3">
               <Sparkles className="w-5 h-5 text-[#F2A541] animate-pulse" />
-              <p className="text-sm text-white/80 font-medium">Your Hearth Balance</p>
+              <p className="text-sm text-white/80 font-medium">Your Ekene Balance</p>
             </div>
             
             <div className="flex items-center justify-center gap-3 mb-2">

@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * ORYO - Vibrant Home Feed (Enhanced)
+ * Ekene - Vibrant Home Feed (Enhanced)
  * ============================================================================
  * Location: src/pages/HomeFeed.tsx
  * 
@@ -60,7 +60,7 @@ const COMMUNITIES = [
   { id: '4', name: 'Event Hosts', emoji: '🎪', members: 567, color: '#1A9BA8' },
 ];
 
-export function OryoHomeFeed() {
+export function EkeneHomeFeed() {
   const [activeTab, setActiveTab] = useState('all');
   const [showTipModal, setShowTipModal] = useState(false);
   const [selectedCreator, setSelectedCreator] = useState<any>(null);

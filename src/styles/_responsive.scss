@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * ORYO - Responsive Design System
+ * Ekene - Responsive Design System
  * ============================================================================
  * Location: src/styles/_responsive.scss
  * 
@@ -313,7 +313,7 @@
 
 @media (prefers-color-scheme: dark) {
   // Dark mode variables would go here
-  // Currently Oryo uses light theme as default
+  // Currently Ekene uses light theme as default
   
   :root {
     --background: #{$charcoal-dark};

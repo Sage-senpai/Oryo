@@ -1,0 +1,469 @@
+/**
+ * ============================================================================
+ * Ekene - Tip Modal Styles
+ * ============================================================================
+ * Location: src/styles/components/_tip-modal.scss
+ * Import in main.scss: @import './components/tip-modal';
+ */
+
+// Overlay
+.tip-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  @include flex-center;
+  padding: $space-4;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.tip-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba($charcoal-dark, 0.6);
+  backdrop-filter: blur(10px);
+}
+
+// Modal Container
+.tip-modal {
+  position: relative;
+  background: $white;
+  border-radius: $radius-2xl;
+  box-shadow: $shadow-xl;
+  max-width: 450px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: scaleIn 0.4s $easing-bounce;
+  
+  &__close {
+    position: absolute;
+    top: $space-4;
+    right: $space-4;
+    width: 40px;
+    height: 40px;
+    border-radius: $radius-full;
+    background: $light-gray;
+    border: none;
+    @include flex-center;
+    cursor: pointer;
+    z-index: 10;
+    @include smooth-transition((background, transform));
+    
+    &:hover {
+      background: $medium-gray;
+      transform: rotate(90deg);
+    }
+  }
+  
+  &__content {
+    padding: $space-6;
+  }
+  
+  &__header {
+    text-align: center;
+    margin-bottom: $space-6;
+  }
+  
+  &__avatar {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto $space-4;
+    border-radius: $radius-full;
+    @include flame-gradient;
+    @include flex-center;
+    font-size: $text-4xl;
+    border: 4px solid $white;
+    box-shadow: $shadow-warm;
+  }
+  
+  &__title {
+    font-size: $text-2xl;
+    font-weight: $font-bold;
+    color: $charcoal-dark;
+    margin-bottom: $space-2;
+  }
+  
+  &__subtitle {
+    font-size: $text-sm;
+    color: $dark-gray;
+  }
+  
+  &__progress {
+    display: flex;
+    gap: $space-2;
+    margin-bottom: $space-6;
+  }
+  
+  &__progress-bar {
+    flex: 1;
+    height: 4px;
+    background: $medium-gray;
+    border-radius: $radius-full;
+    @include smooth-transition(background);
+    
+    &--active {
+      @include flame-gradient;
+    }
+  }
+}
+
+// Step Container
+.tip-step {
+  &__label {
+    text-align: center;
+    font-size: $text-sm;
+    color: $dark-gray;
+    margin-bottom: $space-4;
+  }
+}
+
+// Amount Dial
+.amount-dial {
+  position: relative;
+  width: 192px;
+  height: 192px;
+  margin: 0 auto $space-6;
+  
+  &__glow {
+    position: absolute;
+    inset: 0;
+    border-radius: $radius-full;
+    @include flame-gradient;
+    opacity: 0.2;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  
+  &__inner {
+    position: absolute;
+    inset: 8px;
+    border-radius: $radius-full;
+    background: $white;
+    box-shadow: inset 0 2px 8px rgba($charcoal-dark, 0.1);
+    @include flex-center;
+    flex-direction: column;
+  }
+  
+  &__input {
+    font-size: $text-4xl;
+    font-weight: $font-bold;
+    @include gradient-text;
+    text-align: center;
+    width: 96px;
+    border: none;
+    outline: none;
+    background: transparent;
+  }
+  
+  &__currency {
+    font-size: $text-xs;
+    color: $dark-gray;
+    margin-top: $space-1;
+  }
+}
+
+// Quick Amounts
+.quick-amounts {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $space-2;
+  margin-bottom: $space-6;
+  
+  &__btn {
+    padding: $space-3;
+    border-radius: $radius-xl;
+    font-weight: $font-semibold;
+    background: $light-gray;
+    color: $dark-gray;
+    border: 2px solid transparent;
+    cursor: pointer;
+    @include smooth-transition((background, border-color, transform));
+    
+    &:hover {
+      background: $medium-gray;
+    }
+    
+    &--active {
+      @include flame-gradient;
+      color: $white;
+      box-shadow: $shadow-warm;
+      transform: scale(1.05);
+    }
+  }
+}
+
+// Token List
+.token-list {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  margin-bottom: $space-6;
+}
+
+.token-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-4;
+  background: $light-gray;
+  border: 2px solid transparent;
+  border-radius: $radius-xl;
+  cursor: pointer;
+  @include smooth-transition((border-color, background, box-shadow));
+  
+  &:hover {
+    background: $medium-gray;
+  }
+  
+  &--active {
+    background: rgba($flame-orange, 0.1);
+    border-color: $flame-orange;
+    box-shadow: $shadow-warm;
+  }
+  
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+  }
+  
+  &__icon {
+    width: 40px;
+    height: 40px;
+    border-radius: $radius-lg;
+    @include flex-center;
+    color: $white;
+    font-weight: $font-bold;
+    
+    &--primary {
+      background: $flame-orange;
+    }
+    
+    &--blue {
+      background: $deep-teal;
+    }
+    
+    &--accent {
+      background: $coral-pink;
+    }
+  }
+  
+  &__info {
+    text-align: left;
+  }
+  
+  &__symbol {
+    font-weight: $font-semibold;
+    color: $charcoal-dark;
+  }
+  
+  &__name {
+    font-size: $text-xs;
+    color: $dark-gray;
+  }
+  
+  &__right {
+    text-align: right;
+  }
+  
+  &__balance {
+    font-weight: $font-semibold;
+    color: $charcoal-dark;
+  }
+  
+  &__label {
+    font-size: $text-xs;
+    color: $dark-gray;
+  }
+}
+
+// Message Input
+.message-input {
+  width: 100%;
+  min-height: 120px;
+  padding: $space-4;
+  border-radius: $radius-xl;
+  background: $light-gray;
+  border: 2px solid transparent;
+  resize: none;
+  font-family: $font-body;
+  @include smooth-transition((border-color, background));
+  
+  &:focus {
+    outline: none;
+    border-color: $flame-orange;
+    background: $white;
+  }
+  
+  &::placeholder {
+    color: $dark-gray;
+  }
+}
+
+.message-counter {
+  font-size: $text-xs;
+  color: $dark-gray;
+  text-align: right;
+  margin-top: $space-1;
+  margin-bottom: $space-6;
+}
+
+// Summary
+.tip-summary {
+  background: $light-gray;
+  border-radius: $radius-xl;
+  padding: $space-4;
+  margin-bottom: $space-4;
+  
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    padding: $space-3 0;
+    
+    &:not(:last-child) {
+      border-bottom: 1px solid $medium-gray;
+    }
+    
+    span {
+      color: $dark-gray;
+      font-size: $text-sm;
+    }
+    
+    &--total {
+      border-top: 2px solid $medium-gray;
+      padding-top: $space-4;
+      margin-top: $space-2;
+      
+      span {
+        font-weight: $font-semibold;
+      }
+    }
+  }
+  
+  &__value {
+    font-weight: $font-semibold;
+    color: $charcoal-dark;
+  }
+  
+  &__total {
+    font-size: $text-xl;
+    font-weight: $font-bold;
+    @include gradient-text;
+  }
+}
+
+.tip-message {
+  background: rgba($flame-orange, 0.1);
+  border-radius: $radius-xl;
+  padding: $space-4;
+  margin-bottom: $space-4;
+  
+  &__label {
+    font-size: $text-sm;
+    color: $dark-gray;
+    margin-bottom: $space-1;
+  }
+  
+  &__text {
+    color: $charcoal-dark;
+    font-style: italic;
+  }
+}
+
+.tip-warning {
+  display: flex;
+  align-items: flex-start;
+  gap: $space-3;
+  padding: $space-3;
+  background: rgba($warning, 0.1);
+  border: 1px solid rgba($warning, 0.3);
+  border-radius: $radius-lg;
+  margin-top: $space-4;
+  margin-bottom: $space-6;
+  
+  &__icon {
+    width: 20px;
+    height: 20px;
+    color: $flame-orange;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  
+  &__text {
+    font-size: $text-xs;
+    color: $dark-gray;
+    line-height: $leading-relaxed;
+  }
+}
+
+// Button Group
+.button-group {
+  display: flex;
+  gap: $space-3;
+  
+  .btn {
+    flex: 1;
+  }
+}
+
+// Success View
+.tip-success {
+  text-align: center;
+  padding: $space-8 0;
+  animation: fadeIn 0.5s ease-out;
+  
+  &__icon-container {
+    position: relative;
+    width: 128px;
+    height: 128px;
+    margin: 0 auto $space-6;
+  }
+  
+  &__icon-glow {
+    position: absolute;
+    inset: 0;
+    @include flame-gradient;
+    border-radius: $radius-full;
+    animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+    opacity: 0.2;
+  }
+  
+  &__icon {
+    position: absolute;
+    inset: 0;
+    @include flame-gradient;
+    border-radius: $radius-full;
+    @include flex-center;
+    color: $white;
+    animation: scaleIn 0.4s $easing-bounce;
+    box-shadow: $shadow-glow;
+  }
+  
+  &__title {
+    font-size: $text-3xl;
+    font-weight: $font-bold;
+    color: $charcoal-dark;
+    margin-bottom: $space-2;
+  }
+  
+  &__message {
+    color: $dark-gray;
+    margin-bottom: $space-6;
+  }
+  
+  &__amount {
+    font-weight: $font-bold;
+    @include gradient-text;
+  }
+  
+  &__confetti {
+    font-size: $text-3xl;
+    animation: pulse 1s ease-in-out infinite;
+  }
+}
+
+@keyframes ping {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}

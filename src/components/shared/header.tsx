@@ -49,7 +49,7 @@ export function Header() {
       <div className="container mx-auto px-4 pr-0 py-4 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
           <div className="w-8 h-8 rounded-full bg-linear-to-br from-pink-500  to-yellow-500" />
-          <span className="text-xl font-bold">ORYO</span>
+          <span className="text-xl font-bold">Ekene</span>
         </Link>
         <div className="flex items-center justify-between gap-8">
           {account ? (
