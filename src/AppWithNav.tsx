@@ -8,6 +8,7 @@ export default function AppWithNav() {
 
   const routeToNav = {
     "/": "home",
+    "/search": "search",
     "/discover": "discover",
     "/wallet": "wallet",
     "/communities": "communities",
@@ -19,6 +20,7 @@ export default function AppWithNav() {
 
   const navToRoute = {
     home: "/",
+    search: "/search",
     discover: "/discover",
     wallet: "/wallet",
     communities: "/communities",

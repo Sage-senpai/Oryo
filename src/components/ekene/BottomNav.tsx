@@ -28,6 +28,13 @@ export function BottomNav({ active, onNavigate }: BottomNavProps) {
       gradient: 'linear-gradient(135deg, #FF8C42 0%, #F2A541 100%)'
     },
     {
+    id: 'search' as NavItem,  
+    label: 'Search',
+    icon: Search,
+    color: '#1A9BA8',
+    gradient: 'linear-gradient(135deg, #1A9BA8 0%, #6ED1C5 100%)'
+  },
+    {
       id: 'discover' as NavItem,
       label: 'Discover',
       icon: Compass,

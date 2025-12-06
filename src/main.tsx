@@ -15,6 +15,7 @@ import ProfilePage from "./components/profile.tsx";
 // New pages
 import { EkeneHomeFeed } from "./pages/HomeFeed";
 import { WalletDashboard } from "./pages/WalletDashboard";
+import { SearchPage } from './pages/SearchPage';
 import { DiscoveryPage } from "./pages/DiscoveryPage";
 import { EventMode } from "./pages/EventMode";
 import { CommunitiesPage } from "./pages/CommunitiesPage";
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       { path: "profile", element: <ProfilePage /> },
       { path: "creator-profile", element: <CreatorProfile /> },
+      { path: "search", element: <SearchPage /> },
       { path: "creator/:id", element: <CreatorPage /> },
       { path: "oauth/callback", element: <OAuthCallback /> },
       { path: "feed", element: <EkeneHomeFeed /> },
