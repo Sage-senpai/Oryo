@@ -1,0 +1,460 @@
+//* Location: src/styles/components/_home-feed.scss
+
+.home-feed {
+  position: relative;
+  min-height: 100vh;
+  background: linear-gradient(135deg, $warm-sand 0%, $cream 100%);
+  padding-bottom: 80px; // Space for bottom nav
+
+  // Animated background pattern
+  &__bg-pattern {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.3;
+    
+    .pattern-orb {
+      position: absolute;
+      border-radius: $radius-full;
+      filter: blur(60px);
+      
+      &--1 {
+        top: 10%;
+        right: 10%;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, rgba($sunrise-gold, 0.3) 0%, transparent 70%);
+        animation: float 8s ease-in-out infinite;
+      }
+      
+      &--2 {
+        bottom: 20%;
+        left: 5%;
+        width: 350px;
+        height: 350px;
+        background: radial-gradient(circle, rgba($palm-green, 0.2) 0%, transparent 70%);
+        animation: float 10s ease-in-out infinite;
+        animation-delay: 2s;
+      }
+      
+      &--3 {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba($terracotta-clay, 0.15) 0%, transparent 70%);
+        animation: float 12s ease-in-out infinite;
+        animation-delay: 4s;
+      }
+    }
+  }
+
+  // Header section
+  &__header {
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(135deg, $deep-earth-brown 0%, $burnt-sienna 100%);
+    color: $white;
+    padding: $space-6 $space-4;
+    border-radius: 0 0 $radius-2xl $radius-2xl;
+    margin-bottom: $space-6;
+    box-shadow: $shadow-lg;
+  }
+
+  &__greeting {
+    display: flex;
+    align-items: center;
+    gap: $space-4;
+    margin-bottom: $space-4;
+  }
+
+  &__avatar {
+    position: relative;
+    
+    .avatar-glow {
+      font-size: $text-4xl;
+      filter: drop-shadow(0 4px 12px rgba($sunrise-gold, 0.4));
+      animation: pulse 2s ease-in-out infinite;
+    }
+  }
+
+  &__title {
+    font-family: $font-heading;
+    font-size: $text-2xl;
+    font-weight: $font-bold;
+    margin-bottom: $space-1;
+    
+    @media (max-width: $breakpoint-sm) {
+      font-size: $text-xl;
+    }
+  }
+
+  &__subtitle {
+    font-size: $text-sm;
+    opacity: 0.9;
+  }
+
+  &__balance {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba($white, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba($white, 0.2);
+    border-radius: $radius-xl;
+    padding: $space-3 $space-4;
+    
+    .balance-label {
+      font-size: $text-xs;
+      opacity: 0.8;
+    }
+    
+    .balance-amount {
+      font-size: $text-lg;
+      font-weight: $font-bold;
+    }
+  }
+
+  // Communities carousel
+  &__communities {
+    position: relative;
+    z-index: 1;
+    padding: 0 $space-4 $space-6;
+  }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    font-size: $text-sm;
+    font-weight: $font-semibold;
+    color: $dark-sand;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: $space-4;
+    
+    svg {
+      color: $sunrise-gold;
+    }
+  }
+
+  .communities-carousel {
+    display: flex;
+    gap: $space-3;
+    overflow-x: auto;
+    padding-bottom: $space-2;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .community-orb {
+    flex-shrink: 0;
+    width: 90px;
+    height: 90px;
+    border-radius: $radius-2xl;
+    border: 2px solid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: $space-1;
+    cursor: pointer;
+    @include smooth-transition((transform, box-shadow));
+    position: relative;
+    overflow: hidden;
+    
+    // Glow effect on hover
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -20%;
+      background: radial-gradient(circle, currentColor 0%, transparent 70%);
+      opacity: 0;
+      @include smooth-transition(opacity);
+    }
+    
+    &:hover::before {
+      opacity: 0.2;
+    }
+    
+    .community-icon {
+      font-size: $text-3xl;
+    }
+    
+    .community-name {
+      font-size: $text-xs;
+      font-weight: $font-semibold;
+      color: $deep-earth-brown;
+      text-align: center;
+      max-width: 80px;
+      @include truncate;
+    }
+    
+    .community-members {
+      font-size: 10px;
+      color: $dark-sand;
+    }
+  }
+
+  // Feed section
+  &__feed {
+    position: relative;
+    z-index: 1;
+    padding: 0 $space-4;
+    display: flex;
+    flex-direction: column;
+    gap: $space-4;
+  }
+}
+
+// Feed Cards
+.feed-card {
+  background: $white;
+  border-radius: $radius-2xl;
+  padding: $space-5;
+  box-shadow: $shadow-base;
+  border: 1px solid $light-sand;
+  @include smooth-transition((box-shadow, transform));
+  
+  &:hover {
+    box-shadow: $shadow-md;
+    transform: translateY(-2px);
+  }
+
+  // Header with avatar and info
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+    margin-bottom: $space-4;
+  }
+
+  &__avatar {
+    font-size: $text-3xl;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $gradient-sunrise;
+    border-radius: $radius-full;
+    box-shadow: $shadow-sm;
+  }
+
+  &__info {
+    flex: 1;
+    min-width: 0;
+    
+    strong {
+      font-weight: $font-semibold;
+      color: $deep-earth-brown;
+    }
+  }
+
+  &__username {
+    font-size: $text-sm;
+    color: $dark-sand;
+    margin-left: $space-2;
+  }
+
+  // Message/content
+  &__message,
+  &__content {
+    color: $charcoal;
+    line-height: $leading-relaxed;
+    margin-bottom: $space-3;
+  }
+
+  &__message {
+    font-style: italic;
+    padding: $space-3;
+    background: linear-gradient(135deg, rgba($sunrise-gold, 0.05) 0%, rgba($terracotta-clay, 0.05) 100%);
+    border-radius: $radius-lg;
+    border-left: 3px solid $sunrise-gold;
+  }
+
+  // Footer with timestamp and actions
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: $space-3;
+    border-top: 1px solid $light-sand;
+  }
+
+  &__time {
+    font-size: $text-xs;
+    color: $dark-sand;
+  }
+
+  // Actions (like, comment, share)
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: $space-4;
+    margin-bottom: $space-3;
+    
+    .action-btn {
+      display: flex;
+      align-items: center;
+      gap: $space-2;
+      padding: $space-2 $space-3;
+      background: transparent;
+      border: none;
+      border-radius: $radius-lg;
+      color: $dark-sand;
+      font-size: $text-sm;
+      cursor: pointer;
+      @include smooth-transition((color, background));
+      
+      &:hover {
+        background: rgba($sunrise-gold, 0.1);
+        color: $sunrise-gold;
+      }
+      
+      &--active {
+        color: $clay-red;
+        
+        svg {
+          fill: currentColor;
+        }
+      }
+      
+      svg {
+        width: 18px;
+        height: 18px;
+      }
+    }
+    
+    .ml-auto {
+      margin-left: auto;
+    }
+  }
+
+  // Tip card variant
+  &--tip {
+    border-left: 4px solid $sunrise-gold;
+    background: linear-gradient(135deg, rgba($sunrise-gold, 0.03) 0%, $white 100%);
+    
+    .tip-flow {
+      display: flex;
+      align-items: center;
+      gap: $space-2;
+      
+      .tip-text {
+        color: $charcoal;
+        font-size: $text-sm;
+      }
+    }
+    
+    .tip-amount {
+      font-size: $text-2xl;
+      font-weight: $font-bold;
+      background: $gradient-sunrise;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-top: $space-1;
+    }
+  }
+
+  // Milestone card variant
+  &--milestone {
+    border: 2px solid $sunrise-gold;
+    background: linear-gradient(135deg, rgba($sunrise-gold, 0.1) 0%, rgba($terracotta-clay, 0.05) 100%);
+    position: relative;
+    overflow: hidden;
+    
+    .milestone-glow {
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba($sunrise-gold, 0.2) 0%, transparent 70%);
+      animation: rotate 10s linear infinite;
+    }
+    
+    .milestone-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: $radius-full;
+      background: $gradient-sunrise;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $white;
+      box-shadow: $shadow-warm;
+    }
+    
+    .milestone-text {
+      font-size: $text-lg;
+      font-weight: $font-bold;
+      color: $deep-earth-brown;
+      margin: $space-2 0;
+    }
+    
+    .milestone-total {
+      font-size: $text-sm;
+      color: $dark-sand;
+    }
+  }
+}
+
+// Tip button
+.btn-tip {
+  background: $gradient-sunrise;
+  color: $white;
+  border: none;
+  padding: $space-2 $space-4;
+  border-radius: $radius-lg;
+  font-weight: $font-semibold;
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  box-shadow: $shadow-sm;
+  @include smooth-transition((box-shadow, transform));
+  
+  &:hover {
+    box-shadow: $shadow-md;
+    transform: translateY(-1px);
+  }
+  
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+// Animations
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}

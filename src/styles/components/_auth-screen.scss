@@ -1,0 +1,366 @@
+/**
+ * ============================================================================
+ * Ekene - Auth Screen Styles
+ * ============================================================================
+ * Location: src/styles/components/_auth-screen.scss
+ * 
+ * OTP authentication with warm, welcoming Afrocentric design
+ * ============================================================================
+ */
+
+.auth-screen {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, $warm-sand 0%, $cream 100%);
+  overflow: hidden;
+
+  // Background pattern
+  &__bg {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.4;
+    z-index: 0;
+    
+    .pattern-orb {
+      position: absolute;
+      border-radius: $radius-full;
+      filter: blur(60px);
+      
+      &--1 {
+        top: 20%;
+        right: 10%;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, rgba($sunrise-gold, 0.4) 0%, transparent 70%);
+        animation: float 8s ease-in-out infinite;
+      }
+      
+      &--2 {
+        bottom: 30%;
+        left: 10%;
+        width: 250px;
+        height: 250px;
+        background: radial-gradient(circle, rgba($palm-green, 0.3) 0%, transparent 70%);
+        animation: float 10s ease-in-out infinite;
+        animation-delay: 2s;
+      }
+    }
+  }
+
+  // Main content
+  &__content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 400px;
+    padding: $space-8 $space-4;
+    animation: fadeInUp 0.6s $easing-smooth;
+  }
+
+  // Back button
+  &__back {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    padding: $space-2 $space-3;
+    background: transparent;
+    border: none;
+    color: $dark-sand;
+    font-weight: $font-medium;
+    border-radius: $radius-lg;
+    margin-bottom: $space-8;
+    cursor: pointer;
+    @include smooth-transition((color, background));
+    
+    &:hover {
+      background: rgba($sunrise-gold, 0.1);
+      color: $sunrise-gold;
+    }
+    
+    &:active {
+      transform: scale(0.98);
+    }
+    
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  // Rotating emblem
+  &__emblem {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto $space-6;
+    border-radius: $radius-full;
+    background: $gradient-sunrise;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $white;
+    box-shadow: $shadow-warm;
+    
+    svg {
+      width: 48px;
+      height: 48px;
+      filter: drop-shadow(0 2px 4px rgba($deep-earth-brown, 0.3));
+    }
+  }
+
+  // Title and subtitle
+  &__title {
+    font-family: $font-heading;
+    font-size: $text-3xl;
+    font-weight: $font-bold;
+    color: $deep-earth-brown;
+    text-align: center;
+    margin-bottom: $space-2;
+    line-height: $leading-tight;
+    
+    @media (max-width: $breakpoint-sm) {
+      font-size: $text-2xl;
+    }
+  }
+
+  &__subtitle {
+    font-size: $text-base;
+    color: $dark-sand;
+    text-align: center;
+    margin-bottom: $space-8;
+    line-height: $leading-relaxed;
+  }
+
+  // Form
+  &__form {
+    margin-bottom: $space-6;
+    
+    .form-group {
+      margin-bottom: $space-6;
+    }
+    
+    .form-label {
+      display: block;
+      font-size: $text-sm;
+      font-weight: $font-semibold;
+      color: $deep-earth-brown;
+      margin-bottom: $space-2;
+    }
+    
+    .form-input {
+      width: 100%;
+      padding: $space-4;
+      font-size: $text-base;
+      border: 2px solid $light-sand;
+      border-radius: $radius-lg;
+      background: $white;
+      color: $deep-earth-brown;
+      @include smooth-transition((border-color, box-shadow));
+      
+      &::placeholder {
+        color: $dark-sand;
+      }
+      
+      &:focus {
+        outline: none;
+        border-color: $sunrise-gold;
+        box-shadow: 0 0 0 4px rgba($sunrise-gold, 0.1);
+      }
+      
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        background: $cream;
+      }
+    }
+    
+    .btn {
+      width: 100%;
+      padding: $space-4 $space-6;
+      font-size: $text-lg;
+      font-weight: $font-bold;
+      
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none !important;
+      }
+      
+      .loading-spinner {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 2px solid rgba($white, 0.3);
+        border-top-color: $white;
+        border-radius: $radius-full;
+        animation: spin 0.6s linear infinite;
+        margin-right: $space-2;
+        vertical-align: middle;
+      }
+    }
+  }
+
+  // OTP Input Section
+  &__otp {
+    .otp-inputs {
+      display: flex;
+      gap: $space-3;
+      justify-content: center;
+      margin-bottom: $space-6;
+      
+      @media (max-width: $breakpoint-sm) {
+        gap: $space-2;
+      }
+      
+      .otp-input {
+        width: 48px;
+        height: 56px;
+        text-align: center;
+        font-size: $text-2xl;
+        font-weight: $font-bold;
+        border: 2px solid $light-sand;
+        border-radius: $radius-lg;
+        background: $white;
+        color: $deep-earth-brown;
+        @include smooth-transition((border-color, box-shadow, background));
+        
+        @media (max-width: $breakpoint-sm) {
+          width: 42px;
+          height: 50px;
+          font-size: $text-xl;
+        }
+        
+        &:focus {
+          outline: none;
+          border-color: $sunrise-gold;
+          box-shadow: 0 0 0 4px rgba($sunrise-gold, 0.1);
+          background: $warm-sand;
+        }
+        
+        &:disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+          background: $cream;
+        }
+        
+        // Remove number spinner arrows
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+        
+        &[type=number] {
+          -moz-appearance: textfield;
+        }
+      }
+    }
+  }
+
+  // Resend button
+  &__resend {
+    display: block;
+    width: 100%;
+    padding: $space-3;
+    background: transparent;
+    border: none;
+    color: $sunrise-gold;
+    font-weight: $font-semibold;
+    font-size: $text-base;
+    cursor: pointer;
+    border-radius: $radius-lg;
+    @include smooth-transition((color, background));
+    
+    &:hover {
+      color: $terracotta-clay;
+      background: rgba($sunrise-gold, 0.05);
+    }
+    
+    &:active {
+      transform: scale(0.98);
+    }
+    
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+  }
+
+  // Error message
+  &__error {
+    padding: $space-3 $space-4;
+    background: rgba($clay-red, 0.1);
+    border: 1px solid rgba($clay-red, 0.3);
+    border-radius: $radius-lg;
+    color: $clay-red;
+    font-size: $text-sm;
+    text-align: center;
+    margin-bottom: $space-4;
+    animation: shake 0.5s ease-in-out;
+    
+    // Shake animation for errors
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-10px); }
+      75% { transform: translateX(10px); }
+    }
+  }
+
+  // Cultural icons at bottom
+  &__icons {
+    display: flex;
+    justify-content: center;
+    gap: $space-6;
+    font-size: $text-3xl;
+    margin-top: $space-8;
+    opacity: 0.6;
+    
+    span {
+      animation: float 3s ease-in-out infinite;
+      filter: grayscale(20%);
+      
+      &:nth-child(1) {
+        animation-delay: 0s;
+      }
+      
+      &:nth-child(2) {
+        animation-delay: 1s;
+      }
+      
+      &:nth-child(3) {
+        animation-delay: 2s;
+      }
+    }
+  }
+}
+
+// Animations
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

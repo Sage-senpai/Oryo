@@ -1,82 +1,74 @@
 /**
  * ============================================================================
- * Ekene - Enhanced Design Variables (Vibrant Edition)
+ * EKENE - Afrocentric Design Tokens
  * ============================================================================
  * Location: src/styles/_variables.scss
  * 
- * Brighter, more vibrant color palette with orange and teal as heroes
+ * Yoruba-Igbo inspired color palette with warm, earthy tones
  * ============================================================================
  */
 
 // ============================================================================
-// PRIMARY BRAND COLORS - Enhanced & Vibrant
+// PRIMARY BRAND COLORS - Afrocentric Palette
 // ============================================================================
 
-// Main Heroes
-$flame-orange: #F2A541;      // Primary - Warm flame (unchanged)
-$deep-teal: #0E4D5F;         // Secondary - Deep ocean (unchanged)
+// Core Earth Tones
+$deep-earth-brown: #3A2A1A;     // Grounding, ancestral
+$palm-green: #2B6E3E;           // Life, renewal, community
+$sunrise-gold: #E5A039;         // Primary action, warmth
+$terracotta-clay: #D96B3C;      // Accent, cultural heritage
+$warm-sand: #F3E7D3;            // Background, canvas
 
-// Supporting Cast
-$coral-pink: #FF686B;        // Accent - Warm coral
-$sunset-orange: #FF8C42;     // New - Vibrant sunset
-$electric-teal: #1A9BA8;     // New - Bright teal
-$mint-green: #6ED1C5;        // Highlight - Fresh mint
+// Dark Mode
+$midnight-indigo: #0C0F26;      // Dark background
 
-// Backgrounds - More saturated
-$warm-cream: #FFF5E8;        // Warmer cream
-$soft-peach: #FFE8D6;        // Peachy background
-$light-teal: #E6F7F9;        // Light teal bg
-$off-white: #FEFCF8;         // Slightly warm white
+// Supporting Tones
+$ochre-yellow: #DAA520;         // Highlights
+$burnt-sienna: #8B4513;         // Depth
+$sage-green: #9CAF88;           // Subtle accents
+$clay-red: #CB4154;             // Alerts, warnings
 
-// Neutrals - Less gray, more warmth
+// Neutrals with Warmth
 $white: #FFFFFF;
-$warm-gray-50: #FAF8F5;
-$warm-gray-100: #F5F0EB;
-$warm-gray-200: #E8DFD6;
-$warm-gray-300: #D4C7B8;
-$warm-gray-600: #8B7E6E;
-$warm-gray-900: #3D352C;
-$charcoal-dark: #1E1E23;
-$charcoal: #33333A;
-$black: #000000;
-$dark-gray: #2a2a2a;
-$light-gray: #E0E0E0;
-$medium-gray: #B0B0B0;
-$gray-overlay: rgba(0, 0, 0, 0.5);
-
-
-// Semantic Colors - More vibrant
-$success: #2DD4BF;          // Bright teal success
-$warning: #FBBF24;          // Bright amber
-$error: #F87171;            // Bright red
-$info: #60A5FA;             // Bright blue
+$warm-white: #FFFEF9;
+$cream: #FAF8F3;
+$light-sand: #EDE8DF;
+$medium-sand: #D4C9B8;
+$dark-sand: #9B8B7E;
+$charcoal: #2D2520;
+$black: #1A1410;
 
 // ============================================================================
-// GRADIENTS - Vibrant & Eye-catching
+// SEMANTIC COLORS
 // ============================================================================
 
-$gradient-primary: linear-gradient(135deg, #F2A541 0%, #FF8C42 100%);
-$gradient-secondary: linear-gradient(135deg, #0E4D5F 0%, #1A9BA8 100%);
-$gradient-flame: linear-gradient(135deg, #FF8C42 0%, #F2A541 50%, #FF686B 100%);
-$gradient-ocean: linear-gradient(135deg, #0E4D5F 0%, #1A9BA8 50%, #6ED1C5 100%);
-$gradient-sunset: linear-gradient(135deg, #FF686B 0%, #F2A541 50%, #FBBF24 100%);
-$gradient-warm: linear-gradient(180deg, #FFF5E8 0%, #FFE8D6 100%);
-$gradient-cool: linear-gradient(180deg, #E6F7F9 0%, #FEFCF8 100%);
-$gradient-hero: linear-gradient(135deg, #0E4D5F 0%, #F2A541 50%, #FF686B 100%);
-$gradient-accent: linear-gradient(135deg, #FF8C42 0%, #1A9BA8 100%);
-$gradient-hearth: linear-gradient(135deg, #F2A541 0%, #0E4D5F 50%, #FF686B 100%);
-
-// Overlay gradients for cards
-$gradient-card-warm: linear-gradient(135deg, rgba(242, 165, 65, 0.05) 0%, rgba(255, 104, 107, 0.05) 100%);
-$gradient-card-cool: linear-gradient(135deg, rgba(14, 77, 95, 0.05) 0%, rgba(110, 209, 197, 0.05) 100%);
+$success: #4CAF50;              // Green for success
+$warning: #FFA726;              // Amber for warnings
+$error: #E53935;                // Red for errors
+$info: #2196F3;                 // Blue for info
 
 // ============================================================================
-// TYPOGRAPHY - Same as before but with better defaults
+// GRADIENTS - Afrocentric Flows
 // ============================================================================
 
-$font-heading: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
-$font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-$font-mono: 'SF Mono', 'Monaco', 'Cascadia Code', 'Courier New', monospace;
+$gradient-sunrise: linear-gradient(135deg, $sunrise-gold 0%, $terracotta-clay 100%);
+$gradient-earth: linear-gradient(135deg, $deep-earth-brown 0%, $burnt-sienna 100%);
+$gradient-palm: linear-gradient(135deg, $palm-green 0%, $sage-green 100%);
+$gradient-warm: linear-gradient(180deg, $warm-sand 0%, $cream 100%);
+$gradient-hero: linear-gradient(135deg, $sunrise-gold 0%, $palm-green 50%, $terracotta-clay 100%);
+
+// Overlay gradients
+$gradient-overlay-warm: linear-gradient(135deg, rgba($sunrise-gold, 0.05) 0%, rgba($terracotta-clay, 0.05) 100%);
+$gradient-overlay-earth: linear-gradient(135deg, rgba($deep-earth-brown, 0.05) 0%, rgba($palm-green, 0.05) 100%);
+
+// ============================================================================
+// TYPOGRAPHY - African-inspired
+// ============================================================================
+
+// Font Families
+$font-heading: 'Nunito', 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+$font-body: 'Inter', 'Mulish', -apple-system, BlinkMacSystemFont, sans-serif;
+$font-mono: 'SF Mono', 'Monaco', 'Cascadia Code', monospace;
 
 // Font Sizes
 $text-xs: 0.75rem;      // 12px
@@ -105,7 +97,7 @@ $leading-normal: 1.5;
 $leading-relaxed: 1.75;
 
 // ============================================================================
-// SPACING SCALE
+// SPACING SCALE - Organic Rhythm
 // ============================================================================
 
 $space-1: 0.25rem;   // 4px
@@ -122,32 +114,31 @@ $space-20: 5rem;     // 80px
 $space-24: 6rem;     // 96px
 
 // ============================================================================
-// BORDER RADIUS - More pronounced
+// BORDER RADIUS - Calabash Curves
 // ============================================================================
 
-$radius-sm: 0.5rem;      // 8px (increased)
-$radius-md: 0.75rem;     // 12px (increased)
-$radius-lg: 1rem;        // 16px (increased)
-$radius-xl: 1.5rem;      // 24px (increased)
-$radius-2xl: 2rem;       // 32px (increased)
+$radius-sm: 0.5rem;      // 8px
+$radius-md: 0.75rem;     // 12px
+$radius-lg: 1rem;        // 16px
+$radius-xl: 1.5rem;      // 24px
+$radius-2xl: 2rem;       // 32px
 $radius-full: 9999px;    // Circular
 
 // ============================================================================
-// SHADOWS - More dramatic
+// SHADOWS - Soft & Warm
 // ============================================================================
 
-$shadow-sm: 0 2px 4px 0 rgba(242, 165, 65, 0.08);
-$shadow-base: 0 4px 12px 0 rgba(242, 165, 65, 0.12);
-$shadow-md: 0 6px 16px 0 rgba(242, 165, 65, 0.15);
-$shadow-lg: 0 10px 24px 0 rgba(242, 165, 65, 0.18);
-$shadow-xl: 0 16px 40px 0 rgba(242, 165, 65, 0.22);
-$shadow-warm: 0 8px 24px 0 rgba(242, 165, 65, 0.25);
-$shadow-glow: 0 0 32px 0 rgba(242, 165, 65, 0.4);
-$shadow-teal: 0 8px 24px 0 rgba(14, 77, 95, 0.2);
+$shadow-sm: 0 2px 4px 0 rgba($deep-earth-brown, 0.08);
+$shadow-base: 0 4px 12px 0 rgba($deep-earth-brown, 0.12);
+$shadow-md: 0 6px 16px 0 rgba($deep-earth-brown, 0.15);
+$shadow-lg: 0 10px 24px 0 rgba($deep-earth-brown, 0.18);
+$shadow-xl: 0 16px 40px 0 rgba($deep-earth-brown, 0.22);
+$shadow-warm: 0 8px 24px 0 rgba($sunrise-gold, 0.25);
+$shadow-glow: 0 0 32px 0 rgba($sunrise-gold, 0.4);
 
-// Colored shadows for cards
-$shadow-card-orange: 0 8px 24px rgba(242, 165, 65, 0.15), 0 0 0 1px rgba(242, 165, 65, 0.08);
-$shadow-card-teal: 0 8px 24px rgba(14, 77, 95, 0.15), 0 0 0 1px rgba(14, 77, 95, 0.08);
+// Colored shadows
+$shadow-card-gold: 0 8px 24px rgba($sunrise-gold, 0.15), 0 0 0 1px rgba($sunrise-gold, 0.08);
+$shadow-card-green: 0 8px 24px rgba($palm-green, 0.15), 0 0 0 1px rgba($palm-green, 0.08);
 
 // ============================================================================
 // BREAKPOINTS
@@ -160,16 +151,16 @@ $breakpoint-xl: 1280px;
 $breakpoint-2xl: 1536px;
 
 // ============================================================================
-// TRANSITIONS & ANIMATIONS - Snappier
+// TRANSITIONS & ANIMATIONS - Breathing Rhythm
 // ============================================================================
 
 $transition-fast: 120ms cubic-bezier(0.4, 0, 0.2, 1);
 $transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
 $transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
-$transition-bounce: 400ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+$transition-breath: 400ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
 $easing-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-$easing-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+$easing-breath: cubic-bezier(0.68, -0.55, 0.265, 1.55);
 $easing-elastic: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
 // ============================================================================
@@ -193,14 +184,13 @@ $container-max-width: 1280px;
 $container-padding: $space-4;
 
 // ============================================================================
-// WEB3 GLOWS - More intense
+// AFROCENTRIC GLOWS
 // ============================================================================
 
-$glow-primary: 0 0 24px rgba($flame-orange, 0.6);
-$glow-secondary: 0 0 24px rgba($deep-teal, 0.6);
-$glow-accent: 0 0 24px rgba($coral-pink, 0.6);
-$glow-success: 0 0 24px rgba($success, 0.6);
+$glow-sunrise: 0 0 24px rgba($sunrise-gold, 0.6);
+$glow-palm: 0 0 24px rgba($palm-green, 0.6);
+$glow-clay: 0 0 24px rgba($terracotta-clay, 0.6);
 
 // Pulsing glows
-$glow-pulse-orange: 0 0 20px rgba($flame-orange, 0.4), 0 0 40px rgba($flame-orange, 0.2);
-$glow-pulse-teal: 0 0 20px rgba($deep-teal, 0.4), 0 0 40px rgba($deep-teal, 0.2);
+$glow-pulse-gold: 0 0 20px rgba($sunrise-gold, 0.4), 0 0 40px rgba($sunrise-gold, 0.2);
+$glow-pulse-green: 0 0 20px rgba($palm-green, 0.4), 0 0 40px rgba($palm-green, 0.2);

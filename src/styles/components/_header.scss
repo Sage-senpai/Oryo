@@ -1,254 +1,117 @@
-/**
- * ============================================================================
- * Ekene - Header/Navigation Component
- * ============================================================================
- * Location: src/styles/components/_header.scss
- * 
- * Navigation bar with glassmorphism and sticky positioning
- * ============================================================================
- */
 
 // ============================================================================
-// HEADER NAVIGATION
+// STYLES (Add to src/styles/components/_header.scss)
 // ============================================================================
 
-.header-nav {
+
+.ekene-header {
   background: rgba($white, 0.95);
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid $light-gray;
+  border-bottom: 1px solid $light-sand;
   @include smooth-transition((background, box-shadow));
-  
-  &.scrolled {
-    background: rgba($white, 0.98);
-    box-shadow: $shadow-base;
+  position: sticky;
+  top: 0;
+  z-index: $z-sticky;
+
+  &__container {
+    max-width: $container-max-width;
+    margin: 0 auto;
+    padding: $space-4;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
-}
 
-.header-container {
-  @include flex-between;
-  padding-top: $space-4;
-  padding-bottom: $space-4;
-  gap: $space-4;
-}
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+    text-decoration: none;
+    @include smooth-transition(opacity);
 
-// ============================================================================
-// LOGO
-// ============================================================================
-
-.header-logo {
-  @include flex-center;
-  gap: $space-3;
-  @include smooth-transition(opacity);
-  text-decoration: none;
-  
-  &:hover {
-    opacity: 0.8;
+    &:hover {
+      opacity: 0.8;
+    }
   }
-  
-  .logo-icon {
+
+  &__logo-icon {
     width: 40px;
     height: 40px;
     border-radius: $radius-full;
-    @include flame-gradient;
-    position: relative;
-    
-    &::before {
-      content: '';
-      position: absolute;
-      inset: 4px;
-      background: $deep-teal;
-      border-radius: $radius-full;
-    }
+    background: $gradient-sunrise;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $white;
+    box-shadow: $shadow-sm;
   }
-  
-  .logo-text {
+
+  &__logo-text {
     font-family: $font-heading;
     font-size: $text-2xl;
     font-weight: $font-extrabold;
-    @include gradient-text;
-    
-    @media (max-width: $breakpoint-sm - 1) {
+    background: $gradient-sunrise;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    @media (max-width: $breakpoint-sm) {
       font-size: $text-xl;
     }
   }
-}
 
-// ============================================================================
-// NAVIGATION ACTIONS
-// ============================================================================
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+  }
 
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: $space-4;
-  
-  @media (max-width: $breakpoint-sm - 1) {
+  &__wallet-btn {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    border-color: $light-sand;
+
+    &--connect {
+      background: $gradient-sunrise;
+      color: $white;
+      border: none;
+
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+  }
+
+  &__user-btn {
+    display: flex;
+    align-items: center;
     gap: $space-2;
   }
-}
 
-// ============================================================================
-// USER MENU
-// ============================================================================
-
-.user-menu {
-  position: relative;
-}
-
-.user-menu-trigger {
-  @include flex-center;
-  gap: $space-2;
-  padding: $space-2 $space-3;
-  border-radius: $radius-lg;
-  @include smooth-transition((background, transform));
-  cursor: pointer;
-  
-  &:hover {
-    background: $light-gray;
-  }
-  
-  .user-avatar {
+  &__avatar {
     width: 32px;
     height: 32px;
     border-radius: $radius-full;
-    object-fit: cover;
-    border: 2px solid $light-gray;
+    border: 2px solid $light-sand;
   }
-  
-  .user-name {
-    font-size: $text-sm;
-    font-weight: $font-medium;
-    
-    @media (max-width: $breakpoint-sm - 1) {
-      display: none;
-    }
-  }
-}
 
-// ============================================================================
-// MOBILE MENU TOGGLE
-// ============================================================================
-
-.mobile-menu-toggle {
-  display: none;
-  width: 40px;
-  height: 40px;
-  @include flex-center;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  
-  @media (max-width: $breakpoint-md - 1) {
+  &__x-btn {
     display: flex;
-  }
-  
-  .menu-icon {
-    width: 24px;
-    height: 24px;
-    position: relative;
-    
-    span {
-      display: block;
-      width: 100%;
-      height: 2px;
-      background: $charcoal-dark;
-      border-radius: 2px;
-      position: absolute;
-      left: 0;
-      @include smooth-transition((transform, opacity));
-      
-      &:nth-child(1) {
-        top: 6px;
-      }
-      
-      &:nth-child(2) {
-        top: 11px;
-      }
-      
-      &:nth-child(3) {
-        top: 16px;
-      }
-    }
-  }
-  
-  &.active {
-    .menu-icon span {
-      &:nth-child(1) {
-        transform: translateY(5px) rotate(45deg);
-      }
-      
-      &:nth-child(2) {
-        opacity: 0;
-      }
-      
-      &:nth-child(3) {
-        transform: translateY(-5px) rotate(-45deg);
-      }
+    align-items: center;
+    gap: $space-2;
+    border-color: $light-sand;
+
+    svg {
+      width: 16px;
+      height: 16px;
     }
   }
 }
 
-// ============================================================================
-// MOBILE MENU
-// ============================================================================
-
-.mobile-menu {
-  position: fixed;
-  top: 73px;
-  left: 0;
-  right: 0;
+.ekene-dropdown {
   background: $white;
-  border-bottom: 1px solid $light-gray;
-  padding: $space-6;
-  transform: translateY(-100%);
-  opacity: 0;
-  @include smooth-transition((transform, opacity));
+  border: 1px solid $light-sand;
+  border-radius: $radius-lg;
   box-shadow: $shadow-lg;
-  z-index: $z-dropdown;
-  
-  &.active {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  
-  .mobile-menu-links {
-    display: flex;
-    flex-direction: column;
-    gap: $space-3;
-    
-    a {
-      padding: $space-3;
-      border-radius: $radius-lg;
-      @include smooth-transition(background);
-      
-      &:hover {
-        background: $light-gray;
-      }
-    }
-  }
-}
-
-// ============================================================================
-// NOTIFICATION BADGE
-// ============================================================================
-
-.notification-badge {
-  position: relative;
-  
-  .badge {
-    position: absolute;
-    top: -4px;
-    right: -4px;
-    width: 18px;
-    height: 18px;
-    background: $error;
-    color: $white;
-    font-size: $text-xs;
-    font-weight: $font-bold;
-    border-radius: $radius-full;
-    @include flex-center;
-    border: 2px solid $white;
-    animation: pulse 2s ease-in-out infinite;
-  }
 }

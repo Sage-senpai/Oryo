@@ -1,4 +1,14 @@
-import { Wallet, User, LogOut } from "lucide-react"
+/**
+ * ============================================================================
+ * Ekene - Header Component
+ * ============================================================================
+ * Location: src/components/shared/header.tsx
+ * 
+ * Navigation header with Afrocentric branding
+ * ============================================================================
+ */
+
+import { Wallet, User, LogOut, Settings } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useWallet } from "@/utils/walletContext"
 import { formatAddress } from "@/lib/utils"
@@ -20,14 +30,10 @@ export function Header() {
   const { loading, initOAuth } = useLoginWithOAuth({
     onComplete: ({ user, isNewUser }) => {
       console.log("Logged in via X:", user, "isNewUser:", isNewUser);
-      // setUser(user);
       if (isNewUser) {
-        // e.g., redirect to the “creator onboarding” or “donor profile” flow
-        // your donation app logic: maybe ask user to choose “creator” or “donor”
-        navigate("/OAuth/callback")
+        navigate("/oauth/callback")
       } else {
-        // e.g., redirect to dashboard
-        navigate("/")
+        navigate("/app")
       }
     },
     onError: (err) => {
@@ -42,34 +48,49 @@ export function Header() {
       console.error('OAuth login error:', err);
     }
   };
-  console.log("Header - ready:", ready, "authenticated:", authenticated, "user:", user);
 
   return (
-    <header className="bg-white/80 backdrop-blur-sm border-b border-[#E6DCD2] sticky top-0 z-50">
-      <div className="container mx-auto px-4 pr-0 py-4 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-          <div className="w-8 h-8 rounded-full bg-linear-to-br from-pink-500  to-yellow-500" />
-          <span className="text-xl font-bold">Ekene</span>
+    <header className="ekene-header">
+      <div className="ekene-header__container">
+        {/* Logo */}
+        <Link to="/app" className="ekene-header__logo">
+          <div className="ekene-header__logo-icon">
+            {/* Calabash emblem */}
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+              <circle cx="16" cy="16" r="14" stroke="currentColor" strokeWidth="2" opacity="0.6"/>
+              <circle cx="16" cy="16" r="6" fill="currentColor"/>
+            </svg>
+          </div>
+          <span className="ekene-header__logo-text">Ekene</span>
         </Link>
-        <div className="flex items-center justify-between gap-8">
+
+        {/* Actions */}
+        <div className="ekene-header__actions">
+          {/* Wallet Connection */}
           {account ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline" className="gap-2 bg-linear-to-r from-pink-500 via-secondary to-yellow-500 text-white">
+                <Button variant="outline" className="ekene-header__wallet-btn">
                   <Wallet className="w-4 h-4" />
                   <span className="hidden sm:inline">{formatAddress(account.address)}</span>
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56 bg-gray-100">
+              <DropdownMenuContent align="end" className="w-56 ekene-dropdown">
                 <div className="px-2 py-1.5">
                   <p className="text-sm font-medium">{account.name || "My Wallet"}</p>
                   <p className="text-xs text-gray-400">{formatAddress(account.address, 8)}</p>
                 </div>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
-                  <Link to="/profile" className="cursor-pointer">
+                  <Link to="/app/profile" className="cursor-pointer">
                     <User className="w-4 h-4 mr-2" />
                     My Profile
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/app/wallet" className="cursor-pointer">
+                    <Wallet className="w-4 h-4 mr-2" />
+                    Ekene Vault
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
@@ -80,26 +101,61 @@ export function Header() {
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <Button variant="outline" className="gap-2 bg-linear-to-r from-pink-500 via-secondary to-yellow-500 text-white" onClick={connect} disabled={isConnecting}>
+            <Button 
+              variant="outline" 
+              className="ekene-header__wallet-btn ekene-header__wallet-btn--connect" 
+              onClick={connect} 
+              disabled={isConnecting}
+            >
               <Wallet className="w-4 h-4" />
-              <span className="hidden sm:inline">{isConnecting ? "Connecting..." : "Connect Wallet"}</span>
+              <span className="hidden sm:inline">
+                {isConnecting ? "Connecting..." : "Connect Wallet"}
+              </span>
             </Button>
           )}
-          {
-            user ? (
-              <div className="flex items-center gap-4">
-                <Link to="/profile">
-                  <img src={user.twitter?.profilePictureUrl ?? undefined} alt="Profile" className="w-8 h-8 rounded-full" />
-                </Link>
-                <p className="text-sm">Hello, {user.twitter?.name?.split(" ")[0] || 'User'}</p>
-              </div>
-            ) : (
-              <Button onClick={handleTwitterLogin} disabled={loading} className="cursor-pointer">
-                Connect X {/* check first if user is logged in */}
-              </Button>
-            )
-          }
-          
+
+          {/* X/Twitter Connection */}
+          {user ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="ekene-header__user-btn">
+                  <img 
+                    src={user.twitter?.profilePictureUrl ?? undefined} 
+                    alt="Profile" 
+                    className="ekene-header__avatar"
+                  />
+                  <span className="hidden md:inline">
+                    {user.twitter?.name?.split(" ")[0] || 'User'}
+                  </span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56 ekene-dropdown">
+                <div className="px-2 py-1.5">
+                  <p className="text-sm font-medium">{user.twitter?.name}</p>
+                  <p className="text-xs text-gray-400">@{user.twitter?.username}</p>
+                </div>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link to="/app/profile" className="cursor-pointer">
+                    <Settings className="w-4 h-4 mr-2" />
+                    Settings
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <Button 
+              onClick={handleTwitterLogin} 
+              disabled={loading}
+              className="ekene-header__x-btn"
+              variant="outline"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+              <span className="hidden sm:inline">Connect X</span>
+            </Button>
+          )}
         </div>
       </div>
     </header>

@@ -1,0 +1,208 @@
+//Location: src/styles/components/_entry-screen.scss
+
+
+.entry-screen {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, $warm-sand 0%, $light-sand 100%);
+  overflow: hidden;
+
+  // Animated background canvas
+  &__bg-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0.8;
+    z-index: 0;
+  }
+
+  // Main content container
+  &__content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: $space-8 $space-4;
+    max-width: 500px;
+    width: 100%;
+    animation: fadeInUp 0.8s $easing-smooth;
+  }
+
+  // Pulsing calabash emblem
+  &__emblem {
+    margin: 0 auto $space-8;
+    filter: drop-shadow(0 8px 24px rgba($sunrise-gold, 0.3));
+    
+    svg {
+      width: 120px;
+      height: 120px;
+      
+      @media (max-width: $breakpoint-sm) {
+        width: 100px;
+        height: 100px;
+      }
+    }
+  }
+
+  // Text section
+  &__text {
+    margin-bottom: $space-12;
+  }
+
+  &__title {
+    font-family: $font-heading;
+    font-size: $text-5xl;
+    font-weight: $font-extrabold;
+    color: $deep-earth-brown;
+    margin-bottom: $space-3;
+    line-height: $leading-tight;
+    letter-spacing: -0.02em;
+    
+    @media (max-width: $breakpoint-sm) {
+      font-size: $text-4xl;
+    }
+  }
+
+  &__subtitle {
+    font-size: $text-xl;
+    color: $dark-sand;
+    font-weight: $font-medium;
+    letter-spacing: 0.01em;
+    
+    @media (max-width: $breakpoint-sm) {
+      font-size: $text-lg;
+    }
+  }
+
+  // Action buttons
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    gap: $space-4;
+    margin-bottom: $space-8;
+  }
+
+  &__btn-enter {
+    background: $gradient-sunrise;
+    color: $white;
+    box-shadow: $shadow-warm;
+    border: none;
+    padding: $space-4 $space-8;
+    font-size: $text-lg;
+    font-weight: $font-bold;
+    position: relative;
+    overflow: hidden;
+    
+    // Ember glow effect
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      background: $gradient-sunrise;
+      border-radius: inherit;
+      opacity: 0;
+      z-index: -1;
+      filter: blur(10px);
+      @include smooth-transition(opacity);
+    }
+    
+    &:hover:not(:disabled) {
+      box-shadow: $shadow-glow;
+      transform: translateY(-2px);
+      
+      &::before {
+        opacity: 0.7;
+      }
+    }
+    
+    &:active:not(:disabled) {
+      transform: translateY(0);
+    }
+    
+    &:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      
+      .loading-spinner {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 2px solid rgba($white, 0.3);
+        border-top-color: $white;
+        border-radius: $radius-full;
+        animation: spin 0.6s linear infinite;
+        margin-right: $space-2;
+      }
+    }
+  }
+
+  &__btn-guest {
+    background: transparent;
+    color: $sunrise-gold;
+    border: 2px solid $sunrise-gold;
+    padding: $space-4 $space-8;
+    font-size: $text-lg;
+    font-weight: $font-semibold;
+    @include smooth-transition((background, border-color, transform));
+    
+    &:hover:not(:disabled) {
+      background: rgba($sunrise-gold, 0.1);
+      border-color: $terracotta-clay;
+      color: $terracotta-clay;
+      transform: translateY(-2px);
+    }
+    
+    &:active:not(:disabled) {
+      transform: translateY(0);
+    }
+  }
+
+  // Cultural note at bottom
+  &__note {
+    font-size: $text-sm;
+    color: $dark-sand;
+    line-height: $leading-relaxed;
+    
+    em {
+      color: $sunrise-gold;
+      font-weight: $font-semibold;
+      font-style: normal;
+      position: relative;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: $gradient-sunrise;
+        border-radius: $radius-full;
+      }
+    }
+  }
+}
+
+// Loading spinner animation
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Fade in up animation
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

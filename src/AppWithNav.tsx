@@ -1,4 +1,4 @@
-import { BottomNav } from "./components/Ekene/BottomNav";
+import { BottomNav } from "./components/ekene/BottomNav";
 import App from "./App";
 import { useLocation, useNavigate } from "react-router";
 
