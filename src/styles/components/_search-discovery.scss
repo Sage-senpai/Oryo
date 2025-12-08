@@ -1,0 +1,735 @@
+/**
+ * ============================================================================
+ * Ekene - Search & Discovery Styles (Afrocentric)
+ * ============================================================================
+ * Location: src/styles/components/_search-discovery.scss
+ * 
+ * Warm, cultural search and exploration experience
+ * ============================================================================
+ */
+
+// ============================================================================
+// SEARCH SYSTEM - Main Container
+// ============================================================================
+
+.search-system {
+  min-height: 100vh;
+  background: linear-gradient(180deg, $warm-sand 0%, $cream 100%);
+  position: relative;
+  overflow: hidden;
+
+  // Animated background pattern
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    border-radius: $radius-full;
+    filter: blur(80px);
+    animation: float 15s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  &::before {
+    top: -10%;
+    right: -10%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba($sunrise-gold, 0.2) 0%, transparent 70%);
+  }
+
+  &::after {
+    bottom: -10%;
+    left: -10%;
+    width: 450px;
+    height: 450px;
+    background: radial-gradient(circle, rgba($palm-green, 0.15) 0%, transparent 70%);
+    animation-delay: 5s;
+  }
+}
+
+// ============================================================================
+// SEARCH HEADER
+// ============================================================================
+
+.search-header {
+  position: relative;
+  z-index: 10;
+  background: linear-gradient(135deg, $deep-earth-brown 0%, $burnt-sienna 100%);
+  color: $white;
+  padding: $space-8 $space-4 $space-10;
+  border-radius: 0 0 $radius-2xl $radius-2xl;
+  box-shadow: $shadow-lg;
+
+  @include respond-to('md') {
+    padding: $space-10 $space-6 $space-12;
+  }
+
+  &__title {
+    font-family: $font-heading;
+    font-size: $text-3xl;
+    font-weight: $font-extrabold;
+    margin-bottom: $space-2;
+    text-shadow: 0 2px 8px rgba($charcoal, 0.3);
+
+    @include respond-to('md') {
+      font-size: $text-4xl;
+    }
+  }
+
+  &__subtitle {
+    font-size: $text-sm;
+    opacity: 0.9;
+    margin-bottom: $space-6;
+
+    @include respond-to('md') {
+      font-size: $text-base;
+    }
+  }
+}
+
+// ============================================================================
+// SEARCH BAR
+// ============================================================================
+
+.search-bar {
+  position: relative;
+  max-width: 800px;
+  margin: -$space-8 auto $space-6;
+  padding: 0 $space-4;
+  z-index: 20;
+
+  @include respond-to('md') {
+    margin: -$space-10 auto $space-8;
+  }
+
+  &__input-wrapper {
+    position: relative;
+    background: $white;
+    border-radius: $radius-2xl;
+    box-shadow: $shadow-xl;
+    border: 2px solid transparent;
+    @include smooth-transition((border-color, box-shadow));
+
+    &:focus-within {
+      border-color: $sunrise-gold;
+      box-shadow: 0 0 0 4px rgba($sunrise-gold, 0.1), $shadow-xl;
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    left: $space-5;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    color: $dark-sand;
+    pointer-events: none;
+
+    @include respond-to('md') {
+      left: $space-6;
+    }
+  }
+
+  &__input {
+    width: 100%;
+    padding: $space-4 $space-16 $space-4 $space-14;
+    border: none;
+    border-radius: $radius-2xl;
+    font-size: $text-base;
+    background: transparent;
+    color: $deep-earth-brown;
+
+    @include respond-to('md') {
+      padding: $space-5 $space-20 $space-5 $space-16;
+      font-size: $text-lg;
+    }
+
+    &::placeholder {
+      color: $dark-sand;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__clear {
+    position: absolute;
+    right: $space-5;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    border-radius: $radius-full;
+    background: $light-sand;
+    border: none;
+    @include flex-center;
+    cursor: pointer;
+    @include smooth-transition((background, transform));
+
+    @include respond-to('md') {
+      right: $space-6;
+      width: 36px;
+      height: 36px;
+    }
+
+    &:hover {
+      background: $medium-sand;
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    svg {
+      width: 16px;
+      height: 16px;
+      color: $dark-sand;
+    }
+  }
+}
+
+// ============================================================================
+// SEARCH RESULTS DROPDOWN
+// ============================================================================
+
+.search-results {
+  position: absolute;
+  top: calc(100% + $space-2);
+  left: $space-4;
+  right: $space-4;
+  max-width: 800px;
+  max-height: 500px;
+  margin: 0 auto;
+  background: $white;
+  border-radius: $radius-2xl;
+  box-shadow: $shadow-xl;
+  border: 1px solid $light-sand;
+  overflow: hidden;
+  animation: slideInUp 0.3s $easing-smooth;
+  z-index: 30;
+
+  &__loading,
+  &__empty {
+    padding: $space-12 $space-6;
+    text-align: center;
+    color: $dark-sand;
+  }
+
+  &__loading-spinner {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto $space-4;
+    border: 4px solid $light-sand;
+    border-top-color: $sunrise-gold;
+    border-radius: $radius-full;
+    animation: spin 0.8s linear infinite;
+  }
+
+  &__list {
+    max-height: 500px;
+    overflow-y: auto;
+    @include custom-scrollbar;
+  }
+}
+
+// ============================================================================
+// CREATOR RESULT ITEM
+// ============================================================================
+
+.creator-result {
+  display: flex;
+  align-items: center;
+  gap: $space-4;
+  padding: $space-4;
+  border-bottom: 1px solid $light-sand;
+  cursor: pointer;
+  @include smooth-transition(background);
+  animation: fadeInUp 0.3s $easing-smooth backwards;
+
+  @for $i from 1 through 10 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{$i * 0.05}s;
+    }
+  }
+
+  &:hover {
+    background: rgba($sunrise-gold, 0.05);
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &__avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: $radius-2xl;
+    background: $gradient-sunrise;
+    @include flex-center;
+    font-size: $text-3xl;
+    flex-shrink: 0;
+    box-shadow: $shadow-sm;
+    @include smooth-transition(transform);
+
+    @include respond-to('md') {
+      width: 64px;
+      height: 64px;
+      font-size: $text-4xl;
+    }
+  }
+
+  &:hover &__avatar {
+    transform: scale(1.1);
+  }
+
+  &__info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__name {
+    font-weight: $font-bold;
+    color: $deep-earth-brown;
+    margin-bottom: $space-1;
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    @include truncate;
+
+    @include respond-to('md') {
+      font-size: $text-lg;
+    }
+  }
+
+  &__username {
+    font-size: $text-sm;
+    color: $dark-sand;
+    @include truncate;
+  }
+
+  &__x-badge {
+    width: 16px;
+    height: 16px;
+    color: #1DA1F2;
+    flex-shrink: 0;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    flex-shrink: 0;
+
+    @include respond-to('md') {
+      gap: $space-3;
+    }
+  }
+
+  &__action-btn {
+    padding: $space-2 $space-4;
+    border-radius: $radius-xl;
+    font-size: $text-sm;
+    font-weight: $font-semibold;
+    border: none;
+    cursor: pointer;
+    @include smooth-transition((background, transform));
+
+    @include respond-to('md') {
+      padding: $space-3 $space-5;
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    &--follow {
+      background: $gradient-sunrise;
+      color: $white;
+      box-shadow: $shadow-sm;
+
+      &:hover {
+        box-shadow: $shadow-md;
+      }
+
+      &.following {
+        background: $light-sand;
+        color: $dark-sand;
+        box-shadow: none;
+      }
+    }
+
+    &--tip {
+      background: rgba($sunrise-gold, 0.1);
+      color: $sunrise-gold;
+      border: 1px solid rgba($sunrise-gold, 0.3);
+
+      &:hover {
+        background: rgba($sunrise-gold, 0.2);
+      }
+    }
+
+    svg {
+      width: 14px;
+      height: 14px;
+      margin-right: $space-1;
+    }
+  }
+}
+
+// ============================================================================
+// ACTIVITY FEED TABS
+// ============================================================================
+
+.activity-tabs {
+  display: flex;
+  gap: $space-3;
+  padding: $space-4;
+  background: $white;
+  border-radius: $radius-2xl;
+  box-shadow: $shadow-base;
+  margin: 0 $space-4 $space-6;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+
+  @include respond-to('md') {
+    padding: $space-2;
+    gap: $space-2;
+  }
+
+  &__tab {
+    flex: 1;
+    padding: $space-3 $space-4;
+    border-radius: $radius-xl;
+    font-weight: $font-semibold;
+    font-size: $text-sm;
+    background: transparent;
+    color: $dark-sand;
+    border: none;
+    cursor: pointer;
+    @include smooth-transition((background, color, transform));
+
+    @include respond-to('md') {
+      padding: $space-4 $space-6;
+      font-size: $text-base;
+    }
+
+    &:hover {
+      background: rgba($sunrise-gold, 0.05);
+    }
+
+    &--active {
+      background: $gradient-sunrise;
+      color: $white;
+      box-shadow: $shadow-sm;
+      transform: scale(1.02);
+    }
+  }
+}
+
+// ============================================================================
+// ACTIVITY FEED
+// ============================================================================
+
+.activity-feed {
+  padding: 0 $space-4 $space-20;
+  max-width: 800px;
+  margin: 0 auto;
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: $space-4;
+  }
+
+  &__empty {
+    padding: $space-16 $space-6;
+    text-align: center;
+    background: $white;
+    border-radius: $radius-2xl;
+    box-shadow: $shadow-base;
+
+    .empty-icon {
+      font-size: $text-6xl;
+      margin-bottom: $space-4;
+    }
+
+    h3 {
+      font-size: $text-xl;
+      font-weight: $font-bold;
+      color: $deep-earth-brown;
+      margin-bottom: $space-2;
+    }
+
+    p {
+      color: $dark-sand;
+      line-height: $leading-relaxed;
+    }
+  }
+}
+
+// ============================================================================
+// ACTIVITY POST CARD
+// ============================================================================
+
+.activity-post {
+  background: $white;
+  border-radius: $radius-2xl;
+  padding: $space-5;
+  box-shadow: $shadow-base;
+  border: 1px solid $light-sand;
+  @include smooth-transition((box-shadow, transform));
+  animation: fadeInUp 0.3s $easing-smooth backwards;
+
+  @for $i from 1 through 10 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{$i * 0.05}s;
+    }
+  }
+
+  &:hover {
+    box-shadow: $shadow-lg;
+    transform: translateY(-2px);
+  }
+
+  @include respond-to('md') {
+    padding: $space-6;
+  }
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    gap: $space-3;
+    margin-bottom: $space-4;
+  }
+
+  &__avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: $radius-2xl;
+    background: $gradient-sunrise;
+    @include flex-center;
+    font-size: $text-2xl;
+    flex-shrink: 0;
+    box-shadow: $shadow-sm;
+
+    @include respond-to('md') {
+      width: 56px;
+      height: 56px;
+      font-size: $text-3xl;
+    }
+  }
+
+  &__meta {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__name {
+    font-weight: $font-bold;
+    color: $deep-earth-brown;
+    margin-bottom: $space-1;
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+
+    @include respond-to('md') {
+      font-size: $text-lg;
+    }
+  }
+
+  &__x-badge {
+    width: 16px;
+    height: 16px;
+    color: #1DA1F2;
+  }
+
+  &__timestamp {
+    font-size: $text-sm;
+    color: $dark-sand;
+  }
+
+  &__x-indicator {
+    padding: $space-1 $space-3;
+    background: rgba(#1DA1F2, 0.1);
+    color: #1DA1F2;
+    border-radius: $radius-full;
+    font-size: $text-xs;
+    font-weight: $font-semibold;
+    flex-shrink: 0;
+  }
+
+  &__content {
+    color: $charcoal;
+    line-height: $leading-relaxed;
+    margin-bottom: $space-4;
+    font-size: $text-base;
+
+    @include respond-to('md') {
+      font-size: $text-lg;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: $space-4;
+    padding-top: $space-4;
+    border-top: 1px solid $light-sand;
+  }
+
+  &__action-btn {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    padding: $space-2 $space-3;
+    background: transparent;
+    border: none;
+    border-radius: $radius-lg;
+    color: $dark-sand;
+    font-size: $text-sm;
+    cursor: pointer;
+    @include smooth-transition((color, background));
+
+    &:hover {
+      background: rgba($sunrise-gold, 0.05);
+      color: $sunrise-gold;
+    }
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    &--view-x {
+      margin-left: auto;
+      background: rgba(#1DA1F2, 0.1);
+      color: #1DA1F2;
+
+      &:hover {
+        background: rgba(#1DA1F2, 0.2);
+      }
+    }
+
+    &--tip {
+      margin-left: auto;
+      background: $gradient-sunrise;
+      color: $white;
+      box-shadow: $shadow-sm;
+
+      &:hover {
+        box-shadow: $shadow-md;
+      }
+    }
+  }
+}
+
+// ============================================================================
+// RESPONSIVE ADJUSTMENTS
+// ============================================================================
+
+@media (max-width: $breakpoint-sm - 1) {
+  .search-bar {
+    margin-top: -$space-6;
+    margin-bottom: $space-4;
+  }
+
+  .activity-tabs {
+    margin-left: $space-3;
+    margin-right: $space-3;
+    padding: $space-2;
+    gap: $space-2;
+
+    &__tab {
+      padding: $space-2 $space-3;
+      font-size: $text-xs;
+    }
+  }
+
+  .creator-result {
+    gap: $space-3;
+    padding: $space-3;
+
+    &__actions {
+      flex-direction: column;
+      gap: $space-2;
+    }
+
+    &__action-btn {
+      padding: $space-2 $space-3;
+      font-size: $text-xs;
+
+      svg {
+        width: 12px;
+        height: 12px;
+      }
+    }
+  }
+
+  .activity-post {
+    padding: $space-4;
+
+    &__actions {
+      flex-wrap: wrap;
+      gap: $space-2;
+    }
+
+    &__action-btn {
+      font-size: $text-xs;
+
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      &--tip,
+      &--view-x {
+        margin-left: 0;
+        flex: 1;
+      }
+    }
+  }
+}
+
+// ============================================================================
+// ANIMATIONS
+// ============================================================================
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  33% {
+    transform: translate(30px, -30px);
+  }
+  66% {
+    transform: translate(-20px, 20px);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
