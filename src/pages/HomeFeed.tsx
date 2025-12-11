@@ -12,7 +12,7 @@
 import { useState } from 'react';
 import { Flame, Heart, MessageCircle, Share2, Users, Gift } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { TipFlowModal } from '@/components/TipFlowModal';
+import TipFlowModal  from '@/components/TipFlow/TipFlow';
 
 // ============================================================================
 // MOCK DATA

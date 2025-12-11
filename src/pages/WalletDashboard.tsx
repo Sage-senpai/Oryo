@@ -1,354 +1,407 @@
-/**
- * ============================================================================
- * Ekene - Vibrant Wallet Dashboard
- * ============================================================================
- * Location: src/pages/WalletDashboard.tsx
- * 
- * Colorful, animated wallet with working interactions
- * ============================================================================
- */
-
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { 
-  Send, 
-  Download, 
-  Repeat, 
-  QrCode,
-  ArrowUpRight,
-  ArrowDownLeft,
-  TrendingUp,
-  TrendingDown,
-  Sparkles,
-  Zap,
-  Eye,
-  EyeOff
+  Flame, Eye, EyeOff, Send, Download, RefreshCw, QrCode, 
+  TrendingUp, TrendingDown, ArrowUpRight, ArrowDownLeft, 
+  Repeat, Gift, Crown, Zap 
 } from 'lucide-react';
 
-interface Asset {
-  id: string;
-  name: string;
-  symbol: string;
-  icon: string;
-  balance: string;
-  usdValue: string;
-  change24h: number;
-  color: string;
-  gradient: string;
-}
+const EkeneWalletDashboard = () => {
+  const [balanceVisible, setBalanceVisible] = useState(true);
+  const [activeTab, setActiveTab] = useState('all'); // all, sent, received
 
-interface Activity {
-  id: string;
-  type: 'sent' | 'received' | 'swap';
-  title: string;
-  amount: string;
-  usdValue: string;
-  timestamp: string;
-}
-
-export function WalletDashboard() {
-  const [totalBalance] = useState<number>(1247.82);
-  const [showBalance, setShowBalance] = useState(true);
-  
-  const [assets] = useState<Asset[]>([
-    {
-      id: '1',
-      name: 'Polkadot',
-      symbol: 'DOT',
-      icon: '⚫',
-      balance: '145.23',
-      usdValue: '$891.41',
-      change24h: 5.2,
-      color: '#E6007A',
-      gradient: 'linear-gradient(135deg, #E6007A 0%, #FF1A8C 100%)'
-    },
-    {
-      id: '2',
-      name: 'Ekene Token',
-      symbol: 'Ekene',
-      icon: '🔥',
-      balance: '2,450',
-      usdValue: '$245.00',
-      change24h: -2.1,
-      color: '#F2A541',
-      gradient: 'linear-gradient(135deg, #FF8C42 0%, #F2A541 100%)'
-    },
-    {
-      id: '3',
-      name: 'USDT',
-      symbol: 'USDT',
-      icon: '💵',
-      balance: '111.41',
-      usdValue: '$111.41',
-      change24h: 0.0,
-      color: '#26A17B',
-      gradient: 'linear-gradient(135deg, #26A17B 0%, #50AF95 100%)'
+  // Mock wallet data
+  const walletData = {
+    totalBalanceUSD: 892.41,
+    totalBalanceDOT: 145.5,
+    assets: [
+      { 
+        id: 'dot', 
+        name: 'DOT', 
+        fullName: 'Polkadot',
+        icon: '🔴', 
+        balance: 24.5, 
+        usdPrice: 6.12, 
+        change24h: 5.3,
+        color: 'from-pink-500 to-pink-600' 
+      },
+      { 
+        id: 'ekene', 
+        name: 'EKENE', 
+        fullName: 'Ekene Token',
+        icon: '🔥', 
+        balance: 1000, 
+        usdPrice: 0.05, 
+        change24h: 12.8,
+        color: 'from-orange-500 to-amber-500' 
+      },
+      { 
+        id: 'usdt', 
+        name: 'USDT', 
+        fullName: 'Tether USD',
+        icon: '💵', 
+        balance: 150.0, 
+        usdPrice: 1.0, 
+        change24h: 0.01,
+        color: 'from-green-500 to-green-600' 
+      },
+      { 
+        id: 'usdc', 
+        name: 'USDC', 
+        fullName: 'USD Coin',
+        icon: '💠', 
+        balance: 75.0, 
+        usdPrice: 1.0, 
+        change24h: -0.02,
+        color: 'from-blue-500 to-blue-600' 
+      },
+    ],
+    recentActivity: [
+      {
+        id: 1,
+        type: 'sent',
+        to: 'Amina Kwesi',
+        toUsername: 'amina_creates',
+        amount: 5,
+        token: 'DOT',
+        usdValue: 30.60,
+        timestamp: '2 hours ago',
+        message: 'Great workshop! 🔥'
+      },
+      {
+        id: 2,
+        type: 'received',
+        from: 'Chidi Okafor',
+        fromUsername: 'chidi_dev',
+        amount: 2.5,
+        token: 'DOT',
+        usdValue: 15.30,
+        timestamp: '5 hours ago',
+        message: 'Thanks for the support! ✨'
+      },
+      {
+        id: 3,
+        type: 'swap',
+        fromToken: 'USDT',
+        toToken: 'DOT',
+        amount: 50,
+        received: 8.16,
+        timestamp: '1 day ago'
+      },
+      {
+        id: 4,
+        type: 'received',
+        from: 'Lagos Blockchain',
+        fromUsername: 'lbc_events',
+        amount: 100,
+        token: 'EKENE',
+        usdValue: 5.00,
+        timestamp: '2 days ago',
+        message: 'Event participation bonus 🎉'
+      },
+      {
+        id: 5,
+        type: 'sent',
+        to: 'Web3 Africa',
+        toUsername: 'web3_africa',
+        amount: 10,
+        token: 'DOT',
+        usdValue: 61.20,
+        timestamp: '3 days ago'
+      }
+    ],
+    stats: {
+      totalSent: 234,
+      totalReceived: 312,
+      weeklyStreak: 7,
+      badges: 5
     }
-  ]);
+  };
 
-  const [recentActivity] = useState<Activity[]>([
-    {
-      id: '1',
-      type: 'received',
-      title: 'Tip from @sarah_creates',
-      amount: '+5.0 DOT',
-      usdValue: '$30.65',
-      timestamp: '2 hours ago'
-    },
-    {
-      id: '2',
-      type: 'sent',
-      title: 'Tipped @alex_dev',
-      amount: '-2.5 DOT',
-      usdValue: '$15.32',
-      timestamp: '5 hours ago'
-    },
-    {
-      id: '3',
-      type: 'swap',
-      title: 'Swapped DOT → Ekene',
-      amount: '10.0 DOT',
-      usdValue: '$61.30',
-      timestamp: 'Yesterday'
-    },
-    {
-      id: '4',
-      type: 'received',
-      title: 'Tip from @community',
-      amount: '+1.2 DOT',
-      usdValue: '$7.36',
-      timestamp: '2 days ago'
-    }
-  ]);
+  const filteredActivity = walletData.recentActivity.filter(activity => {
+    if (activeTab === 'all') return true;
+    return activity.type === activeTab;
+  });
 
-  const handleActionClick = (action: string) => {
-    console.log(`${action} clicked`);
-    // TODO: Implement action handlers
+  const formatNumber = (num) => {
+    return new Intl.NumberFormat('en-US', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }).format(num);
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#FFF5E8] via-[#FEFCF8] to-[#E6F7F9] pb-24">
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 pb-24">
       {/* Animated Background */}
-      <div className="fixed inset-0 opacity-20 pointer-events-none">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-[#F2A541]/30 to-[#FF686B]/30 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-br from-[#0E4D5F]/30 to-[#1A9BA8]/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-orange-200/30 rounded-full blur-3xl animate-float" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-amber-200/30 rounded-full blur-3xl animate-float-delayed" />
       </div>
 
-      {/* Header with Balance */}
-      <div className="relative bg-gradient-to-br from-[#0E4D5F] via-[#1A9BA8] to-[#0E4D5F] overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-white to-transparent rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-br from-white to-transparent rounded-full blur-3xl"></div>
-        </div>
+      {/* Header */}
+      <div className="relative bg-gradient-to-br from-amber-900 to-orange-800 text-white pt-8 pb-20 px-4 rounded-b-[3rem] shadow-xl">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-2xl animate-pulse-slow" />
+        
+        <div className="relative z-10 max-w-2xl mx-auto">
+          {/* Greeting */}
+          <div className="flex items-center gap-2 mb-3">
+            <Flame className="w-5 h-5 text-orange-300 animate-flicker" />
+            <span className="text-sm font-medium text-orange-100">Nnọọ, Ekene User</span>
+          </div>
 
-        <div className="relative container mx-auto px-4 py-8">
-          <div className="text-center mb-8">
-            <div className="flex items-center justify-center gap-2 mb-3">
-              <Sparkles className="w-5 h-5 text-[#F2A541] animate-pulse" />
-              <p className="text-sm text-white/80 font-medium">Your Ekene Balance</p>
-            </div>
-            
+          {/* Balance */}
+          <div className="mb-6">
             <div className="flex items-center justify-center gap-3 mb-2">
-              {showBalance ? (
-                <h1 className="text-5xl font-black text-white drop-shadow-lg">
-                  ${totalBalance.toLocaleString('en-US', { minimumFractionDigits: 2 })}
-                </h1>
-              ) : (
-                <h1 className="text-5xl font-black text-white drop-shadow-lg">
-                  ••••••
-                </h1>
-              )}
+              <h1 className="text-5xl font-black">
+                {balanceVisible ? `$${formatNumber(walletData.totalBalanceUSD)}` : '••••••'}
+              </h1>
               <button
-                onClick={() => setShowBalance(!showBalance)}
-                className="p-2 rounded-xl bg-white/10 hover:bg-white/20 transition-all duration-300 active:scale-95"
+                onClick={() => setBalanceVisible(!balanceVisible)}
+                className="w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 transition-colors flex items-center justify-center"
               >
-                {showBalance ? (
-                  <Eye className="w-5 h-5 text-white" />
-                ) : (
-                  <EyeOff className="w-5 h-5 text-white" />
-                )}
+                {balanceVisible ? <Eye className="w-5 h-5" /> : <EyeOff className="w-5 h-5" />}
               </button>
             </div>
-            
-            <p className="text-sm text-white/70">
-              ≈ {(totalBalance / 6.13).toFixed(2)} DOT
+            <p className="text-center text-orange-100 text-sm">
+              {balanceVisible ? `${formatNumber(walletData.totalBalanceDOT)} DOT` : '•••• DOT'}
             </p>
           </div>
 
           {/* Quick Actions */}
           <div className="grid grid-cols-4 gap-3">
-            {[
-              { icon: Send, label: 'Send', action: 'send', color: '#FF8C42' },
-              { icon: Download, label: 'Receive', action: 'receive', color: '#1A9BA8' },
-              { icon: Repeat, label: 'Swap', action: 'swap', color: '#6ED1C5' },
-              { icon: QrCode, label: 'QR Code', action: 'qr', color: '#F2A541' }
-            ].map((item, index) => (
-              <button
-                key={item.action}
-                onClick={() => handleActionClick(item.action)}
-                className="group relative overflow-hidden bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4 hover:bg-white/20 transition-all duration-300 active:scale-95"
-                style={{
-                  animation: `fadeInUp 0.5s ease-out ${index * 0.1}s backwards`
-                }}
-              >
-                <div 
-                  className="w-12 h-12 mx-auto mb-2 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110"
-                  style={{
-                    background: `linear-gradient(135deg, ${item.color}40 0%, ${item.color}60 100%)`
-                  }}
-                >
-                  <item.icon className="w-6 h-6 text-white drop-shadow-lg" />
-                </div>
-                <span className="text-xs font-semibold text-white">{item.label}</span>
-                
-                {/* Glow effect on hover */}
-                <div 
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"
-                  style={{
-                    background: `radial-gradient(circle at center, ${item.color}20 0%, transparent 70%)`
-                  }}
-                ></div>
-              </button>
-            ))}
+            <QuickAction icon={<Send className="w-6 h-6" />} label="Send" color="from-orange-500 to-red-500" />
+            <QuickAction icon={<Download className="w-6 h-6" />} label="Receive" color="from-green-500 to-emerald-500" />
+            <QuickAction icon={<RefreshCw className="w-6 h-6" />} label="Swap" color="from-amber-500 to-yellow-500" />
+            <QuickAction icon={<QrCode className="w-6 h-6" />} label="QR" color="from-purple-500 to-pink-500" />
           </div>
-        </div>
-
-        {/* Wave Divider */}
-        <div className="absolute bottom-0 left-0 right-0">
-          <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
-            <path d="M0 30C240 10 480 10 720 30C960 50 1200 50 1440 30V60H0V30Z" fill="#FFF5E8"/>
-          </svg>
         </div>
       </div>
 
-      {/* Assets Section */}
-      <div className="relative container mx-auto px-4 -mt-6">
-        <div className="bg-white rounded-3xl p-6 shadow-2xl border border-gray-100 mb-6">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-bold bg-gradient-to-r from-[#0E4D5F] to-[#1A9BA8] bg-clip-text text-transparent flex items-center gap-2">
-              <Zap className="w-5 h-5 text-[#F2A541]" />
+      {/* Content */}
+      <div className="relative z-10 max-w-2xl mx-auto px-4 -mt-12">
+        {/* Stats Cards */}
+        <div className="grid grid-cols-4 gap-3 mb-6">
+          <StatCard icon={<ArrowUpRight className="w-4 h-4" />} value={walletData.stats.totalSent} label="Sent" />
+          <StatCard icon={<ArrowDownLeft className="w-4 h-4" />} value={walletData.stats.totalReceived} label="Received" />
+          <StatCard icon={<Flame className="w-4 h-4" />} value={`${walletData.stats.weeklyStreak}d`} label="Streak" />
+          <StatCard icon={<Crown className="w-4 h-4" />} value={walletData.stats.badges} label="Badges" />
+        </div>
+
+        {/* Assets Section */}
+        <div className="bg-white rounded-3xl shadow-lg p-6 mb-6 border border-orange-100">
+          <div className="flex items-center justify-between mb-5">
+            <h2 className="text-xl font-bold text-amber-900 flex items-center gap-2">
+              <Zap className="w-5 h-5 text-orange-500" />
               Your Assets
             </h2>
-            <button className="text-sm font-semibold text-[#F2A541] hover:text-[#FF8C42] transition-colors">
-              View All →
+            <button className="text-sm text-orange-600 font-semibold hover:text-orange-700">
+              Manage
             </button>
           </div>
 
           <div className="space-y-3">
-            {assets.map((asset, index) => (
-              <div
-                key={asset.id}
-                className="group relative bg-gradient-to-br from-gray-50 to-white hover:from-white hover:to-gray-50 rounded-2xl p-4 transition-all duration-300 border border-gray-100 hover:border-[#F2A541]/30 hover:shadow-lg cursor-pointer"
-                style={{
-                  animation: `fadeInUp 0.5s ease-out ${index * 0.1}s backwards`
-                }}
-              >
-                <div className="flex items-center gap-4">
-                  <div 
-                    className="w-14 h-14 rounded-xl flex items-center justify-center text-2xl shadow-lg group-hover:scale-110 transition-transform"
-                    style={{ background: asset.gradient }}
-                  >
-                    {asset.icon}
-                  </div>
-                  
-                  <div className="flex-1 min-w-0">
-                    <h3 className="font-bold text-gray-900 mb-1">{asset.name}</h3>
-                    <p className="text-sm text-gray-600">
-                      {asset.balance} {asset.symbol}
-                    </p>
-                  </div>
-                  
-                  <div className="text-right">
-                    <p className="font-bold text-gray-900 mb-1">{asset.usdValue}</p>
-                    <div className={`flex items-center gap-1 text-sm font-semibold ${
-                      asset.change24h >= 0 ? 'text-green-500' : 'text-red-500'
-                    }`}>
-                      {asset.change24h >= 0 ? (
-                        <TrendingUp className="w-4 h-4" />
-                      ) : (
-                        <TrendingDown className="w-4 h-4" />
-                      )}
-                      {Math.abs(asset.change24h)}%
-                    </div>
-                  </div>
-                </div>
-
-                {/* Hover Glow */}
-                <div 
-                  className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
-                  style={{
-                    background: `radial-gradient(circle at center, ${asset.color}08 0%, transparent 70%)`
-                  }}
-                ></div>
-              </div>
+            {walletData.assets.map((asset) => (
+              <AssetCard key={asset.id} asset={asset} balanceVisible={balanceVisible} />
             ))}
           </div>
         </div>
 
-        {/* Recent Activity */}
-        <div className="bg-white rounded-3xl p-6 shadow-2xl border border-gray-100">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-bold bg-gradient-to-r from-[#0E4D5F] to-[#1A9BA8] bg-clip-text text-transparent flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-[#F2A541]" />
+        {/* Activity Section */}
+        <div className="bg-white rounded-3xl shadow-lg p-6 border border-orange-100">
+          <div className="flex items-center justify-between mb-5">
+            <h2 className="text-xl font-bold text-amber-900 flex items-center gap-2">
+              <Gift className="w-5 h-5 text-orange-500" />
               Recent Activity
             </h2>
-            <button className="text-sm font-semibold text-[#F2A541] hover:text-[#FF8C42] transition-colors">
-              View All →
+            <button className="text-sm text-orange-600 font-semibold hover:text-orange-700">
+              View All
             </button>
           </div>
 
+          {/* Tabs */}
+          <div className="flex gap-2 mb-5 bg-amber-50 p-1 rounded-2xl">
+            <TabButton active={activeTab === 'all'} onClick={() => setActiveTab('all')} label="All" />
+            <TabButton active={activeTab === 'sent'} onClick={() => setActiveTab('sent')} label="Sent" />
+            <TabButton active={activeTab === 'received'} onClick={() => setActiveTab('received')} label="Received" />
+          </div>
+
+          {/* Activity List */}
           <div className="space-y-3">
-            {recentActivity.map((activity, index) => (
-              <div
-                key={activity.id}
-                className="group flex items-center gap-4 p-4 bg-gradient-to-br from-gray-50 to-white hover:from-white hover:to-gray-50 rounded-2xl transition-all duration-300 border border-gray-100 hover:border-[#F2A541]/30 hover:shadow-lg cursor-pointer"
-                style={{
-                  animation: `fadeInUp 0.5s ease-out ${index * 0.1}s backwards`
-                }}
-              >
-                <div className={`w-12 h-12 rounded-xl flex items-center justify-center shadow-md group-hover:scale-110 transition-transform ${
-                  activity.type === 'sent' 
-                    ? 'bg-gradient-to-br from-red-100 to-red-50' 
-                    : activity.type === 'received'
-                    ? 'bg-gradient-to-br from-green-100 to-green-50'
-                    : 'bg-gradient-to-br from-blue-100 to-blue-50'
-                }`}>
-                  {activity.type === 'sent' && <ArrowUpRight className="w-6 h-6 text-red-500" />}
-                  {activity.type === 'received' && <ArrowDownLeft className="w-6 h-6 text-green-500" />}
-                  {activity.type === 'swap' && <Repeat className="w-6 h-6 text-blue-500" />}
-                </div>
-                
-                <div className="flex-1 min-w-0">
-                  <p className="font-semibold text-gray-900 mb-1">{activity.title}</p>
-                  <p className="text-sm text-gray-500">{activity.timestamp}</p>
-                </div>
-                
-                <div className="text-right">
-                  <p className={`font-bold mb-1 ${
-                    activity.type === 'sent' ? 'text-red-500' : 'text-green-500'
-                  }`}>
-                    {activity.amount}
-                  </p>
-                  <p className="text-sm text-gray-500">{activity.usdValue}</p>
-                </div>
+            {filteredActivity.length > 0 ? (
+              filteredActivity.map((activity) => (
+                <ActivityItem key={activity.id} activity={activity} />
+              ))
+            ) : (
+              <div className="text-center py-8 text-gray-400">
+                <p>No {activeTab} transactions yet</p>
               </div>
-            ))}
+            )}
           </div>
         </div>
       </div>
 
-      <style>{`
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% { transform: translate(0, 0); }
+          50% { transform: translate(30px, -30px); }
         }
+        @keyframes float-delayed {
+          0%, 100% { transform: translate(0, 0); }
+          50% { transform: translate(-20px, 20px); }
+        }
+        @keyframes pulse-slow {
+          0%, 100% { opacity: 0.3; }
+          50% { opacity: 0.5; }
+        }
+        @keyframes flicker {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.7; }
+        }
+        .animate-float { animation: float 15s ease-in-out infinite; }
+        .animate-float-delayed { animation: float-delayed 15s ease-in-out infinite 5s; }
+        .animate-pulse-slow { animation: pulse-slow 4s ease-in-out infinite; }
+        .animate-flicker { animation: flicker 2s ease-in-out infinite; }
       `}</style>
     </div>
   );
-}
+};
+
+// Quick Action Component
+const QuickAction = ({ icon, label, color }) => (
+  <button className="flex flex-col items-center gap-2 p-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl hover:bg-white/20 transition-all duration-200 hover:scale-105">
+    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${color} flex items-center justify-center shadow-lg`}>
+      {icon}
+    </div>
+    <span className="text-xs font-semibold">{label}</span>
+  </button>
+);
+
+// Stat Card Component
+const StatCard = ({ icon, value, label }) => (
+  <div className="bg-white rounded-2xl p-4 shadow-md border border-orange-100">
+    <div className="flex items-center justify-between mb-2">
+      <div className="w-8 h-8 rounded-lg bg-orange-100 flex items-center justify-center text-orange-600">
+        {icon}
+      </div>
+    </div>
+    <div className="font-bold text-lg text-amber-900">{value}</div>
+    <div className="text-xs text-gray-500">{label}</div>
+  </div>
+);
+
+// Asset Card Component
+const AssetCard = ({ asset, balanceVisible }) => {
+  const usdValue = asset.balance * asset.usdPrice;
+  const isPositive = asset.change24h > 0;
+
+  return (
+    <button className="w-full flex items-center gap-4 p-4 bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl border border-transparent hover:border-orange-300 transition-all duration-200 hover:shadow-md">
+      <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${asset.color} flex items-center justify-center text-2xl shadow-sm`}>
+        {asset.icon}
+      </div>
+      <div className="flex-1 text-left">
+        <div className="font-bold text-amber-900">{asset.name}</div>
+        <div className="text-sm text-gray-500">{asset.fullName}</div>
+      </div>
+      <div className="text-right">
+        <div className="font-bold text-amber-900">
+          {balanceVisible ? asset.balance.toFixed(2) : '••••'}
+        </div>
+        <div className="text-sm text-gray-500">
+          {balanceVisible ? `$${usdValue.toFixed(2)}` : '$••••'}
+        </div>
+      </div>
+      <div className={`flex items-center gap-1 text-sm font-semibold ${isPositive ? 'text-green-600' : 'text-red-600'}`}>
+        {isPositive ? <TrendingUp className="w-4 h-4" /> : <TrendingDown className="w-4 h-4" />}
+        {Math.abs(asset.change24h)}%
+      </div>
+    </button>
+  );
+};
+
+// Tab Button Component
+const TabButton = ({ active, onClick, label }) => (
+  <button
+    onClick={onClick}
+    className={`flex-1 py-3 rounded-xl font-semibold text-sm transition-all duration-200 ${
+      active
+        ? 'bg-white text-amber-900 shadow-sm'
+        : 'text-amber-700 hover:bg-amber-100'
+    }`}
+  >
+    {label}
+  </button>
+);
+
+// Activity Item Component
+const ActivityItem = ({ activity }) => {
+  const getIcon = () => {
+    switch (activity.type) {
+      case 'sent':
+        return <ArrowUpRight className="w-5 h-5 text-orange-600" />;
+      case 'received':
+        return <ArrowDownLeft className="w-5 h-5 text-green-600" />;
+      case 'swap':
+        return <Repeat className="w-5 h-5 text-blue-600" />;
+      default:
+        return null;
+    }
+  };
+
+  const getBackgroundColor = () => {
+    switch (activity.type) {
+      case 'sent':
+        return 'bg-orange-100';
+      case 'received':
+        return 'bg-green-100';
+      case 'swap':
+        return 'bg-blue-100';
+      default:
+        return 'bg-gray-100';
+    }
+  };
+
+  const getAmountColor = () => {
+    switch (activity.type) {
+      case 'sent':
+        return 'text-orange-600';
+      case 'received':
+        return 'text-green-600';
+      case 'swap':
+        return 'text-blue-600';
+      default:
+        return 'text-gray-600';
+    }
+  };
+
+  return (
+    <div className="flex items-center gap-4 p-4 rounded-2xl border border-amber-100 hover:bg-amber-50 transition-colors">
+      <div className={`w-12 h-12 rounded-xl ${getBackgroundColor()} flex items-center justify-center flex-shrink-0`}>
+        {getIcon()}
+      </div>
+      <div className="flex-1 min-w-0">
+        <div className="font-semibold text-amber-900 truncate">
+          {activity.type === 'sent' && `Sent to ${activity.to}`}
+          {activity.type === 'received' && `Received from ${activity.from}`}
+          {activity.type === 'swap' && `Swapped ${activity.fromToken} → ${activity.toToken}`}
+        </div>
+        <div className="text-sm text-gray-500">{activity.timestamp}</div>
+        {activity.message && (
+          <div className="text-sm text-gray-600 italic mt-1 truncate">"{activity.message}"</div>
+        )}
+      </div>
+      <div className="text-right">
+        <div className={`font-bold ${getAmountColor()}`}>
+          {activity.type === 'swap' 
+            ? `${activity.received} ${activity.toToken}`
+            : `${activity.type === 'sent' ? '-' : '+'}${activity.amount} ${activity.token}`
+          }
+        </div>
+        {activity.usdValue && (
+          <div className="text-sm text-gray-500">${activity.usdValue.toFixed(2)}</div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default EkeneWalletDashboard;

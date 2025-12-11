@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Heart, Users, Copy, Check } from "lucide-react"
 import { useState } from "react"
-import {TipFlowModal} from "@/components/TipFlowModal"
+import TipFlowModal from "@/components/TipFlow/TipFlow"
 
 interface Creator {
   id: string
